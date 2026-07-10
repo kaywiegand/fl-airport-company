@@ -17,12 +17,16 @@ Bisher nur Rohmaterial ohne eigenes Repo, ohne Fundament, ohne öffentliche Aufb
 - [x] Phase 1 — Fundament: eigenes Git-Repo, CLAUDE.md/README/BACKLOG/PROCESS_LOG, `.gitignore`
       für sensible Aufgaben-Infos
 - [x] Phase 2 — Visuals-Export: PDF-Seiten als PNG nach `public/img/`
-- [ ] Phase 3 — Story: `public/md/portfolio.md` aus `report_extract_final.md` befüllen
+- [x] Phase 3 — Story: `public/md/portfolio.md` aus `report_extract_final.md` befüllt
       (`project-case story`)
-- [ ] Phase 4 — Slides: `public/md/slides.yaml` im Dialog erstellen (`project-case slides`)
-- [ ] Phase 5 — Report: `public/index.html` + Views mechanisch generieren (`make portfolio`)
+- [x] Phase 4 — Slides: `public/md/slides.yaml` im Dialog erstellt (`project-case slides`) —
+      3 Views (Overview/StoryView/TechView), TechView mit SQL/M/DAX-Platzhaltern (BACKLOG #1)
+- [x] Phase 5 — Report: `public/index.html` + Views mechanisch generiert (`make portfolio`),
+      im Browser verifiziert (Hub, StoryView-Chart, TechView-Platzhalter)
 - [ ] Phase 6 — Public Launch: Commit + Push nach GitHub, `docs/PROJECTS.md`-Status auf
       `✅ portfolio-ready`
+- [ ] Phase 7 — TechView-Anreicherung: SQL/M-Code/DAX aus Power BI Desktop nachziehen
+      (BACKLOG #1, sobald Windows-Zugang verfügbar)
 
 ---
 

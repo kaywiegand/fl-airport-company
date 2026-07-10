@@ -1,0 +1,224 @@
+{
+  "meta": {
+    "project": "fLAirport — Analyse unpünktlicher Flüge",
+    "period": "2015–2017",
+    "author": "Kay Wiegand",
+    "github": "kaywiegand/fl-airport-company",
+    "presentation_title": "Kennzahlen & Handlungsempfehlungen",
+    "audience": "HR · Business · Hiring Manager",
+    "duration_minutes": 8,
+    "closing_links": [
+      {
+        "href": "report/Report-flAirport_v09.pdf",
+        "label": "Original-Report (PDF)"
+      }
+    ]
+  },
+  "chapters": [
+    {
+      "nav_label": "Projektrahmen",
+      "slides": [
+        {
+          "role": "title",
+          "title": "fLAirport",
+          "subtitle": [
+            "Analyse unpünktlicher Flüge",
+            "Los Angeles International Airport, 2015–2017"
+          ],
+          "content": [
+            {
+              "type": "figures",
+              "items": [
+                {
+                  "value": "1.264.229",
+                  "label": "Flüge 2015–2017 (LAX)",
+                  "sentiment": "neutral"
+                },
+                {
+                  "value": "70 %",
+                  "label": "unpünktlich (≥ 5 Min.)",
+                  "sentiment": "negative"
+                },
+                {
+                  "value": "29,85 %",
+                  "label": "On-Time Performance",
+                  "sentiment": "negative"
+                },
+                {
+                  "value": "26,42 Min.",
+                  "label": "Ø Verspätung pro Flug",
+                  "sentiment": "warning"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "nav_label": "Kennzahlen",
+      "slides": [
+        {
+          "title": "Gesamtüberblick",
+          "subtitle": "1.264.229 Flüge, 2015–2017",
+          "content": [
+            {
+              "type": "chart_refs",
+              "items": [
+                {
+                  "label": "Gesamtanzahl Flüge & Pünktlichkeits-Split",
+                  "source": "page-03",
+                  "caption": "1.264.229 Flüge 2015–2017 an LAX — 377.347 pünktlich (30 %), 886.882 verspätet (70 %)."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Kennzahlen im Detail",
+          "content": [
+            {
+              "type": "chart_refs",
+              "items": [
+                {
+                  "label": "OTP, Delay Index, betroffene Airlines",
+                  "source": "page-05",
+                  "caption": "13 betroffene Fluggesellschaften, On-Time Performance 29,85 %, Delay Index 18,54."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "nav_label": "Airlines",
+      "slides": [
+        {
+          "title": "Anteil der Top-3 an der Gesamtverspätung",
+          "content": [
+            {
+              "type": "chart_refs",
+              "items": [
+                {
+                  "label": "Anteil Top-3 an Gesamtverspätung",
+                  "source": "page-07-right",
+                  "caption": "31.092 von 886.882 Verspätungen = 3,51 % — die 'unpünktlichsten' Airlines sind kaum relevant für die Gesamtzahl."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Wichtige Erkenntnis: Indikator verzerrt",
+          "content": [
+            {
+              "type": "statement",
+              "sentiment": "warning",
+              "text": "Die höchste durchschnittliche Unpünktlichkeit erlaubt eine gewisse Verzerrung der Werte und eignet sich nicht zuverlässig als Indikator. Airlines mit extremen Durchschnittsverspätungen haben oft nur wenige Flüge — ihr hoher Durchschnitt hat wenig Einfluss auf die Gesamtzahl der Verspätungen. Der Wert ignoriert die Häufigkeit verspäteter Flüge im Verhältnis zur Gesamtzahl."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "nav_label": "Zeitliche Muster",
+      "slides": [
+        {
+          "title": "Erkenntnisse Zeitebenen",
+          "content": [
+            {
+              "type": "sections",
+              "items": [
+                {
+                  "label": "Langfristig — Jahre, Quartale, Monate",
+                  "points": [
+                    "Über die Jahre insgesamt steigende Verspätungen",
+                    "Saisonale Muster: Anstieg in Q2, Spitzenwerte in Q3, niedrigster Wert in Q1",
+                    "Feiertage und Urlaubszeiten lassen sich deutlich ablesen"
+                  ]
+                },
+                {
+                  "label": "Kurzfristig — Wochentage, Tagesstunden",
+                  "points": [
+                    "Tagesansicht zeigt starke OTP-Schwankungen — Unbeständigkeit im operativen Ablauf",
+                    "Samstag: deutlich geringste Anzahl und Summe an Verspätungen",
+                    "Freitag, Sonntag und Montag: Werte steigen wieder deutlich an",
+                    "Peaks am Morgen (6–7 und 8–9 Uhr) und am späten Nachmittag"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "nav_label": "Empfehlungen",
+      "slides": [
+        {
+          "title": "Handlungsempfehlungen",
+          "subtitle": "Aus den gesammelten Erkenntnissen",
+          "content": [
+            {
+              "type": "recommendations",
+              "items": [
+                {
+                  "category": "Operative Planung optimieren",
+                  "title": "Saisonale und wöchentliche Muster in die Planung einbeziehen",
+                  "points": [
+                    "Analysierte langfristige saisonale Häufungen sowie Erkenntnisse aus Wochen- und Tagesansicht verstärkt berücksichtigen",
+                    "Spitzenwerten gezielt vorbeugen",
+                    "→ Informationen teilen und in Planungen berücksichtigen"
+                  ]
+                },
+                {
+                  "category": "Research fortführen",
+                  "title": "Ursachen extremer Ausreißer klären",
+                  "points": [
+                    "Teils extreme Spitzen in Anzahl und Summe der Verspätungen erkennbar",
+                    "Auslöser sollten aufgeklärt werden, um Wiederholungen zu vermeiden",
+                    "→ Erkundigungen bei Fachabteilungen einholen"
+                  ]
+                },
+                {
+                  "category": "Indikator verbessern",
+                  "title": "Aussagekräftigere Kennzahlen kombinieren",
+                  "points": [
+                    "Ø-Verspätung pro Flug zeigt die Schwere, nicht die Häufigkeit oder den Einfluss auf den Gesamtflugverkehr",
+                    "Sinnvolle Kombinationen: On-Time Performance & Summe, Anzahl & Summe, Delay Index",
+                    "→ Identifikation geeigneter Indikatoren"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "nav_label": "Abschluss",
+      "slides": [
+        {
+          "role": "closing",
+          "title": "Danke.",
+          "content": [
+            {
+              "type": "links",
+              "items": [
+                {
+                  "href": "report/Report-flAirport_v09.pdf",
+                  "label": "Vollständiger Report (PDF)"
+                },
+                {
+                  "href": "https://github.com/kaywiegand/fl-airport-company",
+                  "label": "GitHub Repo"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

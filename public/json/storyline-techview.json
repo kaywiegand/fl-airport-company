@@ -1,0 +1,356 @@
+{
+  "meta": {
+    "project": "fLAirport — Analyse unpünktlicher Flüge",
+    "period": "2015–2017",
+    "author": "Kay Wiegand",
+    "github": "kaywiegand/fl-airport-company",
+    "presentation_title": "Technischer Deep-Dive: SQL · Power Query · DAX",
+    "audience": "Tech Lead · Data Peers",
+    "duration_minutes": 10,
+    "closing_links": [
+      {
+        "href": "report/Report-flAirport_v09.pdf",
+        "label": "Original-Report (PDF)"
+      }
+    ]
+  },
+  "chapters": [
+    {
+      "nav_label": "Projektrahmen",
+      "slides": [
+        {
+          "title": "Auftrag & Bedingungen",
+          "subtitle": "Rahmen der Analyse",
+          "content": [
+            {
+              "type": "sections",
+              "items": [
+                {
+                  "label": "Betrachtungsraum",
+                  "points": [
+                    "Nur Flüge von oder nach LAX (geplante An-/Abflugzeiten)",
+                    "Zeitraum 2015–2017",
+                    "Gestrichene oder umgeleitete Flüge ausgeschlossen"
+                  ]
+                },
+                {
+                  "label": "Definition Unpünktlichkeit",
+                  "points": [
+                    "≥ 5 Minuten Abweichung von der geplanten Zeit",
+                    "Gilt für zu früh UND zu spät",
+                    "Getrennte Betrachtung nach Abflug/Ankunft möglich"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "nav_label": "Technischer Ansatz",
+      "slides": [
+        {
+          "title": "Datenerhebung — SQL",
+          "subtitle": "PostgreSQL-Quelle, gefiltert beim Import",
+          "content": [
+            {
+              "type": "sections",
+              "items": [
+                {
+                  "label": "Bekannte Filterlogik (Absicht — Native Query folgt)",
+                  "points": [
+                    "EXTRACT + WHERE — Eingrenzung auf Zeitraum 2015–2017",
+                    "WHERE — LAX als Origin oder Destination",
+                    "WHERE — Ausschluss gestrichener/umgeleiteter Flüge",
+                    "ABS() — Absolutwerte für Verspätungen",
+                    "CASE WHEN…THEN…ELSE — neue Spalte für Abflug-/Ankunft-Richtung"
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "statement",
+              "sentiment": "warning",
+              "text": "🔧 Platzhalter — exakter SQL-Quelltext (Native Query) folgt aus Power BI Desktop. Siehe BACKLOG.md #1."
+            }
+          ]
+        },
+        {
+          "title": "Datenbereinigung — Power Query (M)",
+          "subtitle": "Bekannte Schritt-Reihenfolge, Code folgt",
+          "content": [
+            {
+              "type": "steps",
+              "items": [
+                {
+                  "step": "1",
+                  "label": "Datentypen anpassen",
+                  "detail": "Spalten auf korrekte Typen (Datum, Zeit, Zahl) umgestellt"
+                },
+                {
+                  "step": "2",
+                  "label": "Umbenennung",
+                  "detail": "Abfragen, angewendete Schritte und Spalten sprechend benannt"
+                },
+                {
+                  "step": "3",
+                  "label": "Sonderfall 2400 ersetzen",
+                  "detail": "Power BI kennt die Uhrzeit 2400 nicht — behandelt als 23:59"
+                },
+                {
+                  "step": "4",
+                  "label": "Uhrzeit-Formatierung",
+                  "detail": "hhmm-Format ohne führende Nullen in Zeitwerte umgewandelt (M)"
+                },
+                {
+                  "step": "5",
+                  "label": "Airline-Klarnamen",
+                  "detail": "Merge mit UNIQUE_CARRIERS.csv für vollständige Fluggesellschafts-Namen"
+                },
+                {
+                  "step": "6",
+                  "label": "Hilfsspalten",
+                  "detail": "fl_direction, fl_direction_delay_status neu ergänzt"
+                },
+                {
+                  "step": "7",
+                  "label": "Datumstabelle",
+                  "detail": "Für lückenlose zeitliche Darstellungen ergänzt"
+                }
+              ]
+            },
+            {
+              "type": "statement",
+              "sentiment": "warning",
+              "text": "🔧 Platzhalter — vollständiger M-Code je Schritt folgt aus Power BI Desktop (Advanced Editor). Siehe BACKLOG.md #1."
+            }
+          ]
+        },
+        {
+          "title": "Datenanalyse — DAX Measures",
+          "subtitle": "Bekannte Kennzahlen, Formeln folgen",
+          "content": [
+            {
+              "type": "figures",
+              "items": [
+                {
+                  "value": "29,85 %",
+                  "label": "On-Time Performance (Measure)",
+                  "sentiment": "negative"
+                },
+                {
+                  "value": "18,54",
+                  "label": "Delay Index (Measure)",
+                  "sentiment": "warning"
+                },
+                {
+                  "value": "26,42 Min.",
+                  "label": "Ø Verspätung/Flug (Measure)",
+                  "sentiment": "warning"
+                },
+                {
+                  "value": "3,51 %",
+                  "label": "Top-3-Airline-Anteil (Measure + Filter)",
+                  "sentiment": "neutral"
+                }
+              ]
+            },
+            {
+              "type": "statement",
+              "sentiment": "warning",
+              "text": "🔧 Platzhalter — vollständige DAX-Formeln folgen, idealerweise per DAX Studio Export (alle Measures in einem Durchgang). Siehe BACKLOG.md #1."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "nav_label": "Kennzahlen",
+      "slides": [
+        {
+          "title": "Kennzahlen im Überblick",
+          "subtitle": "Konsolidierte Sicht — Detail-Charts siehe StoryView",
+          "content": [
+            {
+              "type": "figures",
+              "items": [
+                {
+                  "value": "1.264.229",
+                  "label": "Flüge 2015–2017",
+                  "sentiment": "neutral"
+                },
+                {
+                  "value": "70 %",
+                  "label": "unpünktlich (≥ 5 Min.)",
+                  "sentiment": "negative"
+                },
+                {
+                  "value": "368.669 / 518.213",
+                  "label": "Abflug- / Ankunftsverspätungen",
+                  "sentiment": "neutral"
+                },
+                {
+                  "value": "13",
+                  "label": "betroffene Fluggesellschaften",
+                  "sentiment": "neutral"
+                },
+                {
+                  "value": "29,85 %",
+                  "label": "On-Time Performance",
+                  "sentiment": "negative"
+                },
+                {
+                  "value": "18,54",
+                  "label": "Delay Index",
+                  "sentiment": "warning"
+                },
+                {
+                  "value": "26,42 Min.",
+                  "label": "Ø Verspätung pro Flug",
+                  "sentiment": "warning"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "nav_label": "Airlines",
+      "slides": [
+        {
+          "title": "Ranking nach Ø-Verspätung",
+          "content": [
+            {
+              "type": "chart_refs",
+              "items": [
+                {
+                  "label": "Airline-Ranking nach Ø-Verspätung",
+                  "source": "page-07-left",
+                  "caption": "13 Fluggesellschaften sortiert nach Ø-Verspätung in Minuten. Top 3: Envoy Air, Frontier Airlines, JetBlue Airways."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Anteil der Top-3 an der Gesamtverspätung",
+          "content": [
+            {
+              "type": "chart_refs",
+              "items": [
+                {
+                  "label": "Anteil Top-3 an Gesamtverspätung",
+                  "source": "page-07-right",
+                  "caption": "31.092 von 886.882 Verspätungen = 3,51 % — die 'unpünktlichsten' Airlines sind kaum relevant für die Gesamtzahl."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Erkenntnisse: Indikator verzerrt",
+          "subtitle": "Konsolidiert aus StoryView",
+          "content": [
+            {
+              "type": "sections",
+              "items": [
+                {
+                  "label": "Beobachtungen",
+                  "points": [
+                    "Top-3 nach Ø-Verspätung tragen nur 3,51 % zur Gesamtverspätung bei",
+                    "2016–2017 (ohne Envoy Air/US Airways): Einfluss deutlicher, Top-3-Anteil 22,31 %",
+                    "Getrennte Ankunfts-/Abflug-Betrachtung: Anteile variieren deutlich"
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "statement",
+              "sentiment": "warning",
+              "text": "Ø-Verspätung/Flug ignoriert die Flughäufigkeit — Airlines mit wenigen Flügen und Extremwerten verzerren den Indikator, ohne relevanten Einfluss auf die Gesamtzahl zu haben."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "nav_label": "Zeitliche Muster",
+      "slides": [
+        {
+          "title": "Anzahl Verspätungen — aggregiert",
+          "content": [
+            {
+              "type": "chart_refs",
+              "items": [
+                {
+                  "label": "Anzahl Verspätungen, aggregiert",
+                  "source": "page-10-left",
+                  "caption": "Nach Jahr/Quartal/Monat/Tag, mit On-Time-Performance-Linie (~28–32 %)."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Wochenansicht — Anzahl mit OTP",
+          "content": [
+            {
+              "type": "chart_refs",
+              "items": [
+                {
+                  "label": "Anzahl Verspätungen mit On-Time Performance",
+                  "source": "page-12-tr",
+                  "caption": "Mo–So, On-Time Performance ~29–31 %."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Tagesansicht — Anzahl nach Uhrzeit",
+          "content": [
+            {
+              "type": "chart_refs",
+              "items": [
+                {
+                  "label": "Anzahl Verspätungen, Tagesansicht",
+                  "source": "page-13-top",
+                  "caption": "Stundenverlauf 0–23 Uhr, Peaks 6–9 Uhr und später Nachmittag."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Erkenntnisse Zeitebenen",
+          "content": [
+            {
+              "type": "sections",
+              "items": [
+                {
+                  "label": "Langfristig — Jahre, Quartale, Monate",
+                  "points": [
+                    "Über die Jahre insgesamt steigende Verspätungen",
+                    "Saisonale Muster: Anstieg in Q2, Spitzenwerte in Q3, niedrigster Wert in Q1",
+                    "Feiertage und Urlaubszeiten lassen sich deutlich ablesen"
+                  ]
+                },
+                {
+                  "label": "Kurzfristig — Wochentage, Tagesstunden",
+                  "points": [
+                    "Tagesansicht zeigt starke OTP-Schwankungen — Unbeständigkeit im operativen Ablauf",
+                    "Samstag: deutlich geringste Anzahl und Summe an Verspätungen",
+                    "Freitag, Sonntag und Montag: Werte steigen wieder deutlich an",
+                    "Peaks am Morgen (6–7 und 8–9 Uhr) und am späten Nachmittag"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

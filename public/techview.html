@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<!--
+  SLIDES TEMPLATE — Workspace Portfolio
+  ======================================
+  Basis für /project-case (generate_html_from_json.py).
+  Enthält NUR Gerüst: Reveal.js CDN · Slide-Theme-Link · JS-Navigation.
+  KEIN inline-CSS und KEIN Projektinhalt.
+
+  Single source of truth für das Slide-Design:
+    public/css/slides.css                              (Theme + alle Komponenten)
+    docs/portfolio/templates/styleguide.html           (visuelle Referenz aller Bausteine)
+
+  Platzhalter (vom Generator ersetzt): der Projekt-Titel im title-Tag
+  und der Slides-Platzhalter-Kommentar im body. (Token hier bewusst nicht
+  literal genannt, damit der naive String-Replace nur den body trifft.)
+-->
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>fLAirport — Analyse unpünktlicher Flüge</title>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/white.css">
+  <link rel="stylesheet" href="css/slides.css?v=1783707190">
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+<!-- Chapter: Projektrahmen -->
+<section data-chapter="0" data-chapter-label="Projektrahmen"><span class="slide-kicker">Projektrahmen</span><h2>Auftrag & Bedingungen</h2><p class="subline">Rahmen der Analyse</p><div class="pf-grid"><div class="pf-card"><div class="pf-title">Betrachtungsraum</div><ul><li>Nur Flüge von oder nach LAX (geplante An-/Abflugzeiten)</li><li>Zeitraum 2015–2017</li><li>Gestrichene oder umgeleitete Flüge ausgeschlossen</li></ul></div><div class="pf-card"><div class="pf-title">Definition Unpünktlichkeit</div><ul><li>≥ 5 Minuten Abweichung von der geplanten Zeit</li><li>Gilt für zu früh UND zu spät</li><li>Getrennte Betrachtung nach Abflug/Ankunft möglich</li></ul></div></div></section><!-- Chapter: Technischer Ansatz -->
+<section data-chapter="1" data-chapter-label="Technischer Ansatz"><span class="slide-kicker">Technischer Ansatz</span><h2>Datenerhebung — SQL</h2><p class="subline">PostgreSQL-Quelle, gefiltert beim Import</p><div class="pf-grid"><div class="pf-card"><div class="pf-title">Bekannte Filterlogik (Absicht — Native Query folgt)</div><ul><li>EXTRACT + WHERE — Eingrenzung auf Zeitraum 2015–2017</li><li>WHERE — LAX als Origin oder Destination</li><li>WHERE — Ausschluss gestrichener/umgeleiteter Flüge</li><li>ABS() — Absolutwerte für Verspätungen</li><li>CASE WHEN…THEN…ELSE — neue Spalte für Abflug-/Ankunft-Richtung</li></ul></div></div><blockquote class="statement">🔧 Platzhalter — exakter SQL-Quelltext (Native Query) folgt aus Power BI Desktop. Siehe BACKLOG.md #1.</blockquote></section><section data-chapter="1"><span class="slide-kicker">Technischer Ansatz</span><h2>Datenbereinigung — Power Query (M)</h2><p class="subline">Bekannte Schritt-Reihenfolge, Code folgt</p><div class="steps" style="grid-template-columns: repeat(7, 1fr)"><div class="step"><div class="sn">1</div><span class="sl">Datentypen anpassen</span><p>Spalten auf korrekte Typen (Datum, Zeit, Zahl) umgestellt</p></div><div class="step"><div class="sn">2</div><span class="sl">Umbenennung</span><p>Abfragen, angewendete Schritte und Spalten sprechend benannt</p></div><div class="step"><div class="sn">3</div><span class="sl">Sonderfall 2400 ersetzen</span><p>Power BI kennt die Uhrzeit 2400 nicht — behandelt als 23:59</p></div><div class="step"><div class="sn">4</div><span class="sl">Uhrzeit-Formatierung</span><p>hhmm-Format ohne führende Nullen in Zeitwerte umgewandelt (M)</p></div><div class="step"><div class="sn">5</div><span class="sl">Airline-Klarnamen</span><p>Merge mit UNIQUE_CARRIERS.csv für vollständige Fluggesellschafts-Namen</p></div><div class="step"><div class="sn">6</div><span class="sl">Hilfsspalten</span><p>fl_direction, fl_direction_delay_status neu ergänzt</p></div><div class="step"><div class="sn">7</div><span class="sl">Datumstabelle</span><p>Für lückenlose zeitliche Darstellungen ergänzt</p></div></div><blockquote class="statement">🔧 Platzhalter — vollständiger M-Code je Schritt folgt aus Power BI Desktop (Advanced Editor). Siehe BACKLOG.md #1.</blockquote></section><section data-chapter="1"><span class="slide-kicker">Technischer Ansatz</span><h2>Datenanalyse — DAX Measures</h2><p class="subline">Bekannte Kennzahlen, Formeln folgen</p><div class="metric-row"><div class="metric bad"><div class="val">29,85 %</div><div class="lbl">On-Time Performance (Measure)</div></div><div class="metric warn"><div class="val">18,54</div><div class="lbl">Delay Index (Measure)</div></div><div class="metric warn"><div class="val">26,42 Min.</div><div class="lbl">Ø Verspätung/Flug (Measure)</div></div><div class="metric"><div class="val">3,51 %</div><div class="lbl">Top-3-Airline-Anteil (Measure + Filter)</div></div></div><blockquote class="statement">🔧 Platzhalter — vollständige DAX-Formeln folgen, idealerweise per DAX Studio Export (alle Measures in einem Durchgang). Siehe BACKLOG.md #1.</blockquote></section><!-- Chapter: Kennzahlen -->
+<section data-chapter="2" data-chapter-label="Kennzahlen"><span class="slide-kicker">Kennzahlen</span><h2>Kennzahlen im Überblick</h2><p class="subline">Konsolidierte Sicht — Detail-Charts siehe StoryView</p><div class="metric-row"><div class="metric"><div class="val">1.264.229</div><div class="lbl">Flüge 2015–2017</div></div><div class="metric bad"><div class="val">70 %</div><div class="lbl">unpünktlich (≥ 5 Min.)</div></div><div class="metric"><div class="val">368.669 / 518.213</div><div class="lbl">Abflug- / Ankunftsverspätungen</div></div><div class="metric"><div class="val">13</div><div class="lbl">betroffene Fluggesellschaften</div></div><div class="metric bad"><div class="val">29,85 %</div><div class="lbl">On-Time Performance</div></div><div class="metric warn"><div class="val">18,54</div><div class="lbl">Delay Index</div></div><div class="metric warn"><div class="val">26,42 Min.</div><div class="lbl">Ø Verspätung pro Flug</div></div></div></section><!-- Chapter: Airlines -->
+<section data-chapter="3" data-chapter-label="Airlines"><span class="slide-kicker">Airlines</span><h2>Ranking nach Ø-Verspätung</h2><div class="chart-single"><a class="chart-tile" href="img/page-07-left.png" target="_blank"><img src="img/page-07-left.png" alt="Airline-Ranking nach Ø-Verspätung"></a><div class="caption">13 Fluggesellschaften sortiert nach Ø-Verspätung in Minuten. Top 3: Envoy Air, Frontier Airlines, JetBlue Airways.</div></div></section><section data-chapter="3"><span class="slide-kicker">Airlines</span><h2>Anteil der Top-3 an der Gesamtverspätung</h2><div class="chart-single"><a class="chart-tile" href="img/page-07-right.png" target="_blank"><img src="img/page-07-right.png" alt="Anteil Top-3 an Gesamtverspätung"></a><div class="caption">31.092 von 886.882 Verspätungen = 3,51 % — die 'unpünktlichsten' Airlines sind kaum relevant für die Gesamtzahl.</div></div></section><section data-chapter="3"><span class="slide-kicker">Airlines</span><h2>Erkenntnisse: Indikator verzerrt</h2><p class="subline">Konsolidiert aus StoryView</p><div class="pf-grid"><div class="pf-card"><div class="pf-title">Beobachtungen</div><ul><li>Top-3 nach Ø-Verspätung tragen nur 3,51 % zur Gesamtverspätung bei</li><li>2016–2017 (ohne Envoy Air/US Airways): Einfluss deutlicher, Top-3-Anteil 22,31 %</li><li>Getrennte Ankunfts-/Abflug-Betrachtung: Anteile variieren deutlich</li></ul></div></div><blockquote class="statement">Ø-Verspätung/Flug ignoriert die Flughäufigkeit — Airlines mit wenigen Flügen und Extremwerten verzerren den Indikator, ohne relevanten Einfluss auf die Gesamtzahl zu haben.</blockquote></section><!-- Chapter: Zeitliche Muster -->
+<section data-chapter="4" data-chapter-label="Zeitliche Muster"><span class="slide-kicker">Zeitliche Muster</span><h2>Anzahl Verspätungen — aggregiert</h2><div class="chart-single"><a class="chart-tile" href="img/page-10-left.png" target="_blank"><img src="img/page-10-left.png" alt="Anzahl Verspätungen, aggregiert"></a><div class="caption">Nach Jahr/Quartal/Monat/Tag, mit On-Time-Performance-Linie (~28–32 %).</div></div></section><section data-chapter="4"><span class="slide-kicker">Zeitliche Muster</span><h2>Wochenansicht — Anzahl mit OTP</h2><div class="chart-single"><a class="chart-tile" href="img/page-12-tr.png" target="_blank"><img src="img/page-12-tr.png" alt="Anzahl Verspätungen mit On-Time Performance"></a><div class="caption">Mo–So, On-Time Performance ~29–31 %.</div></div></section><section data-chapter="4"><span class="slide-kicker">Zeitliche Muster</span><h2>Tagesansicht — Anzahl nach Uhrzeit</h2><div class="chart-single"><a class="chart-tile" href="img/page-13-top.png" target="_blank"><img src="img/page-13-top.png" alt="Anzahl Verspätungen, Tagesansicht"></a><div class="caption">Stundenverlauf 0–23 Uhr, Peaks 6–9 Uhr und später Nachmittag.</div></div></section><section data-chapter="4"><span class="slide-kicker">Zeitliche Muster</span><h2>Erkenntnisse Zeitebenen</h2><div class="pf-grid"><div class="pf-card"><div class="pf-title">Langfristig — Jahre, Quartale, Monate</div><ul><li>Über die Jahre insgesamt steigende Verspätungen</li><li>Saisonale Muster: Anstieg in Q2, Spitzenwerte in Q3, niedrigster Wert in Q1</li><li>Feiertage und Urlaubszeiten lassen sich deutlich ablesen</li></ul></div><div class="pf-card"><div class="pf-title">Kurzfristig — Wochentage, Tagesstunden</div><ul><li>Tagesansicht zeigt starke OTP-Schwankungen — Unbeständigkeit im operativen Ablauf</li><li>Samstag: deutlich geringste Anzahl und Summe an Verspätungen</li><li>Freitag, Sonntag und Montag: Werte steigen wieder deutlich an</li><li>Peaks am Morgen (6–7 und 8–9 Uhr) und am späten Nachmittag</li></ul></div></div></section>
+</div><!-- /slides -->
+</div><!-- /reveal -->
+
+<div id="nav-prev" class="nav-arrow" title="Zurück">←</div>
+<div id="slideticks"></div>
+<div id="nav-next" class="nav-arrow" title="Weiter">→</div>
+<div id="progress-track"><div id="progress-fill"></div></div>
+
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+<script>
+Reveal.initialize({
+  hash: true,
+  controls: false,
+  progress: false,
+  transition: 'slide',
+  transitionSpeed: 'fast',
+  margin: 0.07,
+  width: 1024,
+  height: 720
+});
+
+// Custom bottom navigation: slide ticks + progress bar
+const slides = Array.from(document.querySelectorAll('.reveal .slides > section'));
+const total = slides.length;
+const progressFill = document.getElementById('progress-fill');
+const tickContainer = document.getElementById('slideticks');
+
+// Detect chapter-start slides via data-chapter-label attribute
+const chapterStarts = {};
+slides.forEach((section, i) => {
+  if (section.hasAttribute('data-chapter-label')) {
+    chapterStarts[i] = i === 0 ? 'Titel' : section.dataset.chapterLabel;
+  }
+});
+
+// Build tick elements
+for (let i = 0; i < total; i++) {
+  const wrap = document.createElement('div');
+  wrap.className = 'stk-wrap';
+  if (chapterStarts.hasOwnProperty(i)) {
+    wrap.classList.add('stk-chapter');
+    const lbl = document.createElement('span');
+    lbl.className = 'stk-ch-label';
+    lbl.textContent = chapterStarts[i];
+    wrap.appendChild(lbl);
+  }
+  const line = document.createElement('span');
+  line.className = 'stk';
+  const num = document.createElement('span');
+  num.className = 'stk-num';
+  num.textContent = i + 1;
+  wrap.appendChild(line);
+  wrap.appendChild(num);
+  tickContainer.appendChild(wrap);
+}
+
+const ticks = tickContainer.querySelectorAll('.stk-wrap');
+
+// Click a tick (or its number) to jump straight to that slide
+ticks.forEach((t, i) => t.addEventListener('click', () => Reveal.slide(i)));
+
+// Prev / next arrows flanking the tick bar
+const prevArrow = document.getElementById('nav-prev');
+const nextArrow = document.getElementById('nav-next');
+prevArrow.addEventListener('click', () => Reveal.prev());
+nextArrow.addEventListener('click', () => Reveal.next());
+
+function updateNav() {
+  const idx = Reveal.getState().indexh;
+  ticks.forEach((t, i) => {
+    t.classList.remove('stk-past', 'stk-current');
+    if (i === idx) t.classList.add('stk-current');
+    else if (i < idx) t.classList.add('stk-past');
+  });
+  // Invert nav colors on dark title / closing slides
+  const current = slides[idx];
+  document.body.classList.toggle('nav-invert', !!current && (current.classList.contains('title-slide') || current.classList.contains('closing')));
+  // Only show the arrow that can actually navigate
+  prevArrow.classList.toggle('nav-hidden', idx === 0);
+  nextArrow.classList.toggle('nav-hidden', idx === total - 1);
+  requestAnimationFrame(() => {
+    const track = document.getElementById('progress-track');
+    const tick = ticks[idx];
+    if (!track || !tick) return;
+    const stkLine = tick.querySelector('.stk');
+    if (!stkLine) return;
+    const trackRect = track.getBoundingClientRect();
+    const stkRect = stkLine.getBoundingClientRect();
+    const centerX = stkRect.left + stkRect.width / 2;
+    const pct = trackRect.width > 0
+      ? Math.max(0, Math.min(100, (centerX - trackRect.left) / trackRect.width * 100))
+      : 0;
+    progressFill.style.width = pct + '%';
+  });
+}
+
+Reveal.on('slidechanged', updateNav);
+Reveal.on('ready', updateNav);
+updateNav();
+</script>
+</body>
+</html>

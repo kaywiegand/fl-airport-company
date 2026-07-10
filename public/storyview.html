@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<!--
+  SLIDES TEMPLATE — Workspace Portfolio
+  ======================================
+  Basis für /project-case (generate_html_from_json.py).
+  Enthält NUR Gerüst: Reveal.js CDN · Slide-Theme-Link · JS-Navigation.
+  KEIN inline-CSS und KEIN Projektinhalt.
+
+  Single source of truth für das Slide-Design:
+    public/css/slides.css                              (Theme + alle Komponenten)
+    docs/portfolio/templates/styleguide.html           (visuelle Referenz aller Bausteine)
+
+  Platzhalter (vom Generator ersetzt): der Projekt-Titel im title-Tag
+  und der Slides-Platzhalter-Kommentar im body. (Token hier bewusst nicht
+  literal genannt, damit der naive String-Replace nur den body trifft.)
+-->
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>fLAirport — Analyse unpünktlicher Flüge</title>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/white.css">
+  <link rel="stylesheet" href="css/slides.css?v=1783707190">
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+<!-- Chapter: Projektrahmen -->
+<section class="title-slide" data-background="#1a3a5c" data-chapter="0" data-chapter-label="Projektrahmen"><h1>fLAirport</h1><div class="sub">Analyse unpünktlicher Flüge<br>Los Angeles International Airport, 2015–2017</div><div class="kpi-row"><div class="kpi"><div class="v">1.264.229</div><div class="l">Flüge 2015–2017 (LAX)</div></div><div class="kpi red"><div class="v">70 %</div><div class="l">unpünktlich (≥ 5 Min.)</div></div><div class="kpi red"><div class="v">29,85 %</div><div class="l">On-Time Performance</div></div><div class="kpi amber"><div class="v">26,42 Min.</div><div class="l">Ø Verspätung pro Flug</div></div></div><div class="closing-links title-cta"><span class="c-link" onclick="Reveal.next()">Start</span></div></section><section data-chapter="0"><div class="agenda-cols"><div class="agenda-head"><h2>Inhalt</h2></div><div class="agenda-list"><div class="ag-item"><span class="ag-num">1</span><span class="ag-label">Kennzahlen — Aktueller Überblick der Lage</span></div><div class="ag-item"><span class="ag-num">2</span><span class="ag-label">Analyse — Identifizierung von Häufungen (Airlines, Zeiträume)</span></div><div class="ag-item"><span class="ag-num">3</span><span class="ag-label">Rückschlüsse — Handlungsempfehlungen</span></div></div></div></section><section data-chapter="0"><span class="slide-kicker">Projektrahmen</span><h2>Auftrag & Bedingungen</h2><p class="subline">Rahmen der Analyse</p><div class="pf-grid"><div class="pf-card"><div class="pf-title">Betrachtungsraum</div><ul><li>Nur Flüge von oder nach LAX (geplante An-/Abflugzeiten)</li><li>Zeitraum 2015–2017</li><li>Gestrichene oder umgeleitete Flüge ausgeschlossen</li></ul></div><div class="pf-card"><div class="pf-title">Definition Unpünktlichkeit</div><ul><li>≥ 5 Minuten Abweichung von der geplanten Zeit</li><li>Gilt für zu früh UND zu spät</li><li>Getrennte Betrachtung nach Abflug/Ankunft möglich</li></ul></div></div></section><!-- Chapter: Kennzahlen -->
+<section data-chapter="1" data-chapter-label="Kennzahlen"><span class="slide-kicker">Kennzahlen</span><h2>Gesamtüberblick</h2><p class="subline">1.264.229 Flüge, 2015–2017</p><div class="chart-single"><a class="chart-tile" href="img/page-03.png" target="_blank"><img src="img/page-03.png" alt="Gesamtanzahl Flüge & Pünktlichkeits-Split"></a><div class="caption">1.264.229 Flüge 2015–2017 an LAX — 377.347 pünktlich (30 %), 886.882 verspätet (70 %).</div></div></section><section data-chapter="1"><span class="slide-kicker">Kennzahlen</span><h2>Verspätungen nach Richtung</h2><div class="chart-single"><a class="chart-tile" href="img/page-04.png" target="_blank"><img src="img/page-04.png" alt="Verspätungen Abflug/Ankunft/Gesamt"></a><div class="caption">368.669 Abflug- und 518.213 Ankunftsverspätungen, zusammen 886.882.</div></div></section><section data-chapter="1"><span class="slide-kicker">Kennzahlen</span><h2>Kennzahlen im Detail</h2><div class="chart-single"><a class="chart-tile" href="img/page-05.png" target="_blank"><img src="img/page-05.png" alt="OTP, Delay Index, betroffene Airlines"></a><div class="caption">13 betroffene Fluggesellschaften, On-Time Performance 29,85 %, Delay Index 18,54.</div></div></section><section data-chapter="1"><span class="slide-kicker">Kennzahlen</span><h2>Verspätung pro Tag und Flug</h2><div class="chart-single"><a class="chart-tile" href="img/page-06.png" target="_blank"><img src="img/page-06.png" alt="Verspätungen pro Tag / pro Flug"></a><div class="caption">Ø 26,42 Minuten Verspätung pro Flug (Ankunft 26,51 / Abflug 26,30).</div></div></section><!-- Chapter: Airlines -->
+<section data-chapter="2" data-chapter-label="Airlines"><span class="slide-kicker">Airlines</span><h2>Ranking nach Ø-Verspätung</h2><div class="chart-single"><a class="chart-tile" href="img/page-07-left.png" target="_blank"><img src="img/page-07-left.png" alt="Airline-Ranking nach Ø-Verspätung"></a><div class="caption">13 Fluggesellschaften sortiert nach Ø-Verspätung in Minuten. Top 3: Envoy Air, Frontier Airlines, JetBlue Airways.</div></div></section><section data-chapter="2"><span class="slide-kicker">Airlines</span><h2>Anteil der Top-3 an der Gesamtverspätung</h2><div class="chart-single"><a class="chart-tile" href="img/page-07-right.png" target="_blank"><img src="img/page-07-right.png" alt="Anteil Top-3 an Gesamtverspätung"></a><div class="caption">31.092 von 886.882 Verspätungen = 3,51 % — die 'unpünktlichsten' Airlines sind kaum relevant für die Gesamtzahl.</div></div></section><section data-chapter="2"><span class="slide-kicker">Airlines</span><h2>Erkenntnisse: Anteil variiert</h2><div class="pf-grid"><div class="pf-card"><div class="pf-title">Beobachtungen</div><ul><li>Insgesamt kommen Envoy Air, Frontier Airlines und JetBlue Airways auf nur 3,51 % der Gesamtzahl an Verspätungen</li><li>Betrachtet man 2016–2017 (ohne Envoy Air und US Airways), wird der Einfluss deutlicher</li><li>Auch bei getrennter Betrachtung von Ankunft und Abflug variieren die Anteile deutlich</li><li>2016–2017 höchste Ø-Unpünktlichkeit: American Airlines, Frontier Airlines, JetBlue Airways — Anteil an der Gesamtzahl: 22,31 %</li></ul></div></div></section><section data-chapter="2"><span class="slide-kicker">Airlines</span><h2>Wichtige Erkenntnis: Indikator verzerrt</h2><div class="statement-lead">Die höchste durchschnittliche Unpünktlichkeit erlaubt eine gewisse Verzerrung der Werte und eignet sich nicht zuverlässig als Indikator. Airlines mit extremen Durchschnittsverspätungen haben oft nur wenige Flüge — ihr hoher Durchschnitt hat wenig Einfluss auf die Gesamtzahl der Verspätungen. Der Wert ignoriert die Häufigkeit verspäteter Flüge im Verhältnis zur Gesamtzahl.</div></section><!-- Chapter: Zeitliche Muster -->
+<section data-chapter="3" data-chapter-label="Zeitliche Muster"><span class="slide-kicker">Zeitliche Muster</span><h2>Anzahl Verspätungen — aggregiert</h2><div class="chart-single"><a class="chart-tile" href="img/page-10-left.png" target="_blank"><img src="img/page-10-left.png" alt="Anzahl Verspätungen, aggregiert"></a><div class="caption">Nach Jahr/Quartal/Monat/Tag, mit On-Time-Performance-Linie (~28–32 %).</div></div></section><section data-chapter="3"><span class="slide-kicker">Zeitliche Muster</span><h2>Summe Verspätungen — aggregiert</h2><div class="chart-single"><a class="chart-tile" href="img/page-10-right.png" target="_blank"><img src="img/page-10-right.png" alt="Summe Verspätungen, aggregiert"></a><div class="caption">Nach Jahr/Quartal/Monat/Tag, 0–0,7 Mio. Verspätungsminuten.</div></div></section><section data-chapter="3"><span class="slide-kicker">Zeitliche Muster</span><h2>Anzahl Verspätungen — kontinuierlich</h2><div class="chart-single"><a class="chart-tile" href="img/page-11-top.png" target="_blank"><img src="img/page-11-top.png" alt="Anzahl Verspätungen, kontinuierlich"></a><div class="caption">Q1–Q4, 2015–2017 im Verlauf.</div></div></section><section data-chapter="3"><span class="slide-kicker">Zeitliche Muster</span><h2>Summe Verspätungen — kontinuierlich</h2><div class="chart-single"><a class="chart-tile" href="img/page-11-bottom.png" target="_blank"><img src="img/page-11-bottom.png" alt="Summe Verspätungen, kontinuierlich"></a><div class="caption">Detailansicht Januar/Februar 2015 auf Tagesebene.</div></div></section><section data-chapter="3"><span class="slide-kicker">Zeitliche Muster</span><h2>Wochenansicht — Anzahl (Linie)</h2><div class="chart-single"><a class="chart-tile" href="img/page-12-tl.png" target="_blank"><img src="img/page-12-tl.png" alt="Anzahl Verspätungen, Wochenansicht"></a><div class="caption">Mo–So, 105–135 Tsd. Verspätungen.</div></div></section><section data-chapter="3"><span class="slide-kicker">Zeitliche Muster</span><h2>Wochenansicht — Anzahl mit OTP</h2><div class="chart-single"><a class="chart-tile" href="img/page-12-tr.png" target="_blank"><img src="img/page-12-tr.png" alt="Anzahl Verspätungen mit On-Time Performance"></a><div class="caption">Mo–So, On-Time Performance ~29–31 %.</div></div></section><section data-chapter="3"><span class="slide-kicker">Zeitliche Muster</span><h2>Wochenansicht — Summe (Linie)</h2><div class="chart-single"><a class="chart-tile" href="img/page-12-bl.png" target="_blank"><img src="img/page-12-bl.png" alt="Summe Verspätungen, Wochenansicht"></a><div class="caption">Mo–So, Summe der Verspätungsminuten.</div></div></section><section data-chapter="3"><span class="slide-kicker">Zeitliche Muster</span><h2>Wochenansicht — Summe mit OTP</h2><div class="chart-single"><a class="chart-tile" href="img/page-12-br.png" target="_blank"><img src="img/page-12-br.png" alt="Summe Verspätungen mit On-Time Performance"></a><div class="caption">Mo–So, On-Time Performance ~29 %.</div></div></section><section data-chapter="3"><span class="slide-kicker">Zeitliche Muster</span><h2>Tagesansicht — Anzahl nach Uhrzeit</h2><div class="chart-single"><a class="chart-tile" href="img/page-13-top.png" target="_blank"><img src="img/page-13-top.png" alt="Anzahl Verspätungen, Tagesansicht"></a><div class="caption">Stundenverlauf 0–23 Uhr, Peaks 6–9 Uhr und später Nachmittag.</div></div></section><section data-chapter="3"><span class="slide-kicker">Zeitliche Muster</span><h2>Tagesansicht — Summe nach Uhrzeit</h2><div class="chart-single"><a class="chart-tile" href="img/page-13-bottom.png" target="_blank"><img src="img/page-13-bottom.png" alt="Summe Verspätungen, Tagesansicht"></a><div class="caption">Stundenverlauf 0–23 Uhr.</div></div></section><section data-chapter="3"><span class="slide-kicker">Zeitliche Muster</span><h2>Erkenntnisse Zeitebenen</h2><div class="pf-grid"><div class="pf-card"><div class="pf-title">Langfristig — Jahre, Quartale, Monate</div><ul><li>Über die Jahre insgesamt steigende Verspätungen</li><li>Saisonale Muster: Anstieg in Q2, Spitzenwerte in Q3, niedrigster Wert in Q1</li><li>Feiertage und Urlaubszeiten lassen sich deutlich ablesen</li></ul></div><div class="pf-card"><div class="pf-title">Kurzfristig — Wochentage, Tagesstunden</div><ul><li>Tagesansicht zeigt starke OTP-Schwankungen — Unbeständigkeit im operativen Ablauf</li><li>Samstag: deutlich geringste Anzahl und Summe an Verspätungen</li><li>Freitag, Sonntag und Montag: Werte steigen wieder deutlich an</li><li>Peaks am Morgen (6–7 und 8–9 Uhr) und am späten Nachmittag</li></ul></div></div></section><!-- Chapter: Empfehlungen -->
+<section data-chapter="4" data-chapter-label="Empfehlungen"><span class="slide-kicker">Empfehlungen</span><h2>Handlungsempfehlungen</h2><p class="subline">Aus den gesammelten Erkenntnissen</p><div class="reco-grid"><div class="reco"><div class="rn">Operative Planung optimieren</div><strong>Saisonale und wöchentliche Muster in die Planung einbeziehen</strong><ul><li>Analysierte langfristige saisonale Häufungen sowie Erkenntnisse aus Wochen- und Tagesansicht verstärkt berücksichtigen</li><li>Spitzenwerten gezielt vorbeugen</li><li>→ Informationen teilen und in Planungen berücksichtigen</li></ul></div><div class="reco"><div class="rn">Research fortführen</div><strong>Ursachen extremer Ausreißer klären</strong><ul><li>Teils extreme Spitzen in Anzahl und Summe der Verspätungen erkennbar</li><li>Auslöser sollten aufgeklärt werden, um Wiederholungen zu vermeiden</li><li>→ Erkundigungen bei Fachabteilungen einholen</li></ul></div><div class="reco"><div class="rn">Indikator verbessern</div><strong>Aussagekräftigere Kennzahlen kombinieren</strong><ul><li>Ø-Verspätung pro Flug zeigt die Schwere, nicht die Häufigkeit oder den Einfluss auf den Gesamtflugverkehr</li><li>Sinnvolle Kombinationen: On-Time Performance & Summe, Anzahl & Summe, Delay Index</li><li>→ Identifikation geeigneter Indikatoren</li></ul></div></div></section><!-- Chapter: Abschluss -->
+<section class="closing" data-background="#1a3a5c" data-chapter="5" data-chapter-label="Abschluss"><h2>Danke.</h2><div class="links-grid"><a class="quick-link" href="report/Report-flAirport_v09.pdf">Vollständiger Report (PDF)</a><a class="quick-link" href="https://github.com/kaywiegand/fl-airport-company">GitHub Repo</a></div><div class="closing-links"><a href="index.html" class="c-link">Zur Übersicht</a><a href="https://github.com/kaywiegand/fl-airport-company" class="c-link">GitHub-Repo</a><a href="report/Report-flAirport_v09.pdf" class="c-link">Original-Report (PDF)</a></div></section><!-- Chapter: Anhang: Airline-Details -->
+<section data-chapter="6" data-chapter-label="Anhang: Airline-Details"><span class="slide-kicker">Anhang: Airline-Details</span><h2>On-Time Performance Airlines — Anzahl</h2><div class="chart-single"><a class="chart-tile" href="img/page-18-left.png" target="_blank"><img src="img/page-18-left.png" alt="OTP Airlines nach Anzahl"></a><div class="caption">Anzahl Verspätungen je Airline mit On-Time-Performance-Linie.</div></div></section><section data-chapter="6"><span class="slide-kicker">Anhang: Airline-Details</span><h2>On-Time Performance Airlines — Summe</h2><div class="chart-single"><a class="chart-tile" href="img/page-18-right.png" target="_blank"><img src="img/page-18-right.png" alt="OTP Airlines nach Summe"></a><div class="caption">Summe Verspätungen je Airline mit On-Time-Performance-Linie.</div></div></section><section data-chapter="6"><span class="slide-kicker">Anhang: Airline-Details</span><h2>Ranking nach Anzahl der Verspätungen</h2><div class="chart-single"><a class="chart-tile" href="img/page-19.png" target="_blank"><img src="img/page-19.png" alt="Ranking nach Anzahl"></a><div class="caption">Alle 13 Fluggesellschaften sortiert nach absoluter Anzahl Verspätungen.</div></div></section><section data-chapter="6"><span class="slide-kicker">Anhang: Airline-Details</span><h2>Delay Index Airlines</h2><div class="chart-single"><a class="chart-tile" href="img/page-20.png" target="_blank"><img src="img/page-20.png" alt="Delay Index je Airline"></a><div class="caption">Delay Index je Airline, Durchschnitt 19,23.</div></div></section><section data-chapter="6"><span class="slide-kicker">Anhang: Airline-Details</span><h2>Delay Rate Airlines</h2><div class="chart-single"><a class="chart-tile" href="img/page-21.png" target="_blank"><img src="img/page-21.png" alt="Delay Rate je Airline"></a><div class="caption">Delay Rate je Airline, Durchschnitt 71,33 %.</div></div></section>
+</div><!-- /slides -->
+</div><!-- /reveal -->
+
+<div id="nav-prev" class="nav-arrow" title="Zurück">←</div>
+<div id="slideticks"></div>
+<div id="nav-next" class="nav-arrow" title="Weiter">→</div>
+<div id="progress-track"><div id="progress-fill"></div></div>
+
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+<script>
+Reveal.initialize({
+  hash: true,
+  controls: false,
+  progress: false,
+  transition: 'slide',
+  transitionSpeed: 'fast',
+  margin: 0.07,
+  width: 1024,
+  height: 720
+});
+
+// Custom bottom navigation: slide ticks + progress bar
+const slides = Array.from(document.querySelectorAll('.reveal .slides > section'));
+const total = slides.length;
+const progressFill = document.getElementById('progress-fill');
+const tickContainer = document.getElementById('slideticks');
+
+// Detect chapter-start slides via data-chapter-label attribute
+const chapterStarts = {};
+slides.forEach((section, i) => {
+  if (section.hasAttribute('data-chapter-label')) {
+    chapterStarts[i] = i === 0 ? 'Titel' : section.dataset.chapterLabel;
+  }
+});
+
+// Build tick elements
+for (let i = 0; i < total; i++) {
+  const wrap = document.createElement('div');
+  wrap.className = 'stk-wrap';
+  if (chapterStarts.hasOwnProperty(i)) {
+    wrap.classList.add('stk-chapter');
+    const lbl = document.createElement('span');
+    lbl.className = 'stk-ch-label';
+    lbl.textContent = chapterStarts[i];
+    wrap.appendChild(lbl);
+  }
+  const line = document.createElement('span');
+  line.className = 'stk';
+  const num = document.createElement('span');
+  num.className = 'stk-num';
+  num.textContent = i + 1;
+  wrap.appendChild(line);
+  wrap.appendChild(num);
+  tickContainer.appendChild(wrap);
+}
+
+const ticks = tickContainer.querySelectorAll('.stk-wrap');
+
+// Click a tick (or its number) to jump straight to that slide
+ticks.forEach((t, i) => t.addEventListener('click', () => Reveal.slide(i)));
+
+// Prev / next arrows flanking the tick bar
+const prevArrow = document.getElementById('nav-prev');
+const nextArrow = document.getElementById('nav-next');
+prevArrow.addEventListener('click', () => Reveal.prev());
+nextArrow.addEventListener('click', () => Reveal.next());
+
+function updateNav() {
+  const idx = Reveal.getState().indexh;
+  ticks.forEach((t, i) => {
+    t.classList.remove('stk-past', 'stk-current');
+    if (i === idx) t.classList.add('stk-current');
+    else if (i < idx) t.classList.add('stk-past');
+  });
+  // Invert nav colors on dark title / closing slides
+  const current = slides[idx];
+  document.body.classList.toggle('nav-invert', !!current && (current.classList.contains('title-slide') || current.classList.contains('closing')));
+  // Only show the arrow that can actually navigate
+  prevArrow.classList.toggle('nav-hidden', idx === 0);
+  nextArrow.classList.toggle('nav-hidden', idx === total - 1);
+  requestAnimationFrame(() => {
+    const track = document.getElementById('progress-track');
+    const tick = ticks[idx];
+    if (!track || !tick) return;
+    const stkLine = tick.querySelector('.stk');
+    if (!stkLine) return;
+    const trackRect = track.getBoundingClientRect();
+    const stkRect = stkLine.getBoundingClientRect();
+    const centerX = stkRect.left + stkRect.width / 2;
+    const pct = trackRect.width > 0
+      ? Math.max(0, Math.min(100, (centerX - trackRect.left) / trackRect.width * 100))
+      : 0;
+    progressFill.style.width = pct + '%';
+  });
+}
+
+Reveal.on('slidechanged', updateNav);
+Reveal.on('ready', updateNav);
+updateNav();
+</script>
+</body>
+</html>
