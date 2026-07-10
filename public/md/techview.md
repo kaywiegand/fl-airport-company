@@ -15,6 +15,23 @@
 
 ### Projektrahmen
 
+# fLAirport
+
+**Analyse unpünktlicher Flüge**
+**Los Angeles International Airport, 2015–2017**
+
+* **1.264.229** — Flüge 2015–2017 (LAX)
+* **70 %** — unpünktlich (≥ 5 Min.)
+* **29,85 %** — On-Time Performance
+* **26,42 Min.** — Ø Verspätung pro Flug
+
+## Inhalt
+*Kennzahlen, Analyse, Rückschlüsse*
+
+1. Kennzahlen — Aktueller Überblick der Lage
+2. Analyse — Identifizierung von Häufungen (Airlines, Zeiträume)
+3. Rückschlüsse — Handlungsempfehlungen
+
 ## Auftrag & Bedingungen
 *Rahmen der Analyse*
 

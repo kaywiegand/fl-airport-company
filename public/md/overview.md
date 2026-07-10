@@ -25,6 +25,13 @@
 * **29,85 %** — On-Time Performance
 * **26,42 Min.** — Ø Verspätung pro Flug
 
+## Inhalt
+*Kennzahlen, Analyse, Rückschlüsse*
+
+1. Kennzahlen — Aktueller Überblick der Lage
+2. Analyse — Identifizierung von Häufungen (Airlines, Zeiträume)
+3. Rückschlüsse — Handlungsempfehlungen
+
 
 ---
 
@@ -42,6 +49,9 @@
 
 ### Airlines
 
+## Ranking nach Ø-Verspätung
+
+
 ## Anteil der Top-3 an der Gesamtverspätung
 
 
@@ -53,6 +63,9 @@
 ---
 
 ### Zeitliche Muster
+
+## Anzahl Verspätungen — aggregiert
+
 
 ## Erkenntnisse Zeitebenen
 

@@ -19,6 +19,55 @@
       "nav_label": "Projektrahmen",
       "slides": [
         {
+          "role": "title",
+          "title": "fLAirport",
+          "subtitle": [
+            "Analyse unpünktlicher Flüge",
+            "Los Angeles International Airport, 2015–2017"
+          ],
+          "content": [
+            {
+              "type": "figures",
+              "items": [
+                {
+                  "value": "1.264.229",
+                  "label": "Flüge 2015–2017 (LAX)",
+                  "sentiment": "neutral"
+                },
+                {
+                  "value": "70 %",
+                  "label": "unpünktlich (≥ 5 Min.)",
+                  "sentiment": "negative"
+                },
+                {
+                  "value": "29,85 %",
+                  "label": "On-Time Performance",
+                  "sentiment": "negative"
+                },
+                {
+                  "value": "26,42 Min.",
+                  "label": "Ø Verspätung pro Flug",
+                  "sentiment": "warning"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Inhalt",
+          "subtitle": "Kennzahlen, Analyse, Rückschlüsse",
+          "content": [
+            {
+              "type": "agenda",
+              "items": [
+                "Kennzahlen — Aktueller Überblick der Lage",
+                "Analyse — Identifizierung von Häufungen (Airlines, Zeiträume)",
+                "Rückschlüsse — Handlungsempfehlungen"
+              ]
+            }
+          ]
+        },
+        {
           "title": "Auftrag & Bedingungen",
           "subtitle": "Rahmen der Analyse",
           "content": [

@@ -4,8 +4,8 @@ Automatisch generiert aus `public/md/slides.yaml` via `scripts/print_slide_matri
 
 | id | Kapitel | Inhalt | StoryView | TechView | Overview |
 |:---|:---|:---|:---:|:---:|:---:|
-| `projektrahmen-cover` | Projektrahmen | KPIs | ✅ |  | ✅ |
-| `projektrahmen-inhalt` | Projektrahmen | Agenda | ✅ |  |  |
+| `projektrahmen-cover` | Projektrahmen | KPIs | ✅ | ✅ | ✅ |
+| `projektrahmen-inhalt` | Projektrahmen | Agenda | ✅ | ✅ | ✅ |
 | `projektrahmen-auftrag` | Projektrahmen | Abschnitte | ✅ | ✅ |  |
 | `tech-sql` | Technischer Ansatz | Abschnitte + Statement |  | ✅ |  |
 | `tech-mcode` | Technischer Ansatz | Schritte + Statement |  | ✅ |  |
@@ -15,12 +15,12 @@ Automatisch generiert aus `public/md/slides.yaml` via `scripts/print_slide_matri
 | `kennzahlen-airlines-otp` | Kennzahlen | Chart | ✅ |  | ✅ |
 | `kennzahlen-dauer` | Kennzahlen | Chart | ✅ |  |  |
 | `kennzahlen-tech-merged` | Kennzahlen | KPIs |  | ✅ |  |
-| `airlines-ranking` | Airlines | Chart | ✅ | ✅ |  |
+| `airlines-ranking` | Airlines | Chart | ✅ | ✅ | ✅ |
 | `airlines-anteil` | Airlines | Chart | ✅ | ✅ | ✅ |
 | `airlines-erkenntnis-anteil` | Airlines | Abschnitte | ✅ |  |  |
 | `airlines-erkenntnis-indikator` | Airlines | Statement | ✅ |  | ✅ |
 | `airlines-tech-insights` | Airlines | Abschnitte + Statement |  | ✅ |  |
-| `zeitmuster-anzahl-aggregiert` | Zeitliche Muster | Chart | ✅ | ✅ |  |
+| `zeitmuster-anzahl-aggregiert` | Zeitliche Muster | Chart | ✅ | ✅ | ✅ |
 | `zeitmuster-summe-aggregiert` | Zeitliche Muster | Chart | ✅ |  |  |
 | `zeitmuster-anzahl-kontinuierlich` | Zeitliche Muster | Chart | ✅ |  |  |
 | `zeitmuster-summe-kontinuierlich` | Zeitliche Muster | Chart | ✅ |  |  |
@@ -39,4 +39,4 @@ Automatisch generiert aus `public/md/slides.yaml` via `scripts/print_slide_matri
 | `anhang-delay-index` | Anhang: Airline-Details | Chart | ✅ |  |  |
 | `anhang-delay-rate` | Anhang: Airline-Details | Chart | ✅ |  |  |
 
-**34 Slide-Einträge total · 13 davon in mehr als 1 View wiederverwendet.**
+**34 Slide-Einträge total · 14 davon in mehr als 1 View wiederverwendet.**

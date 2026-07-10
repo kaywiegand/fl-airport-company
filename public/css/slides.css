@@ -75,12 +75,16 @@
 
 /* Content slides: fixed 56/56/40 frame around the content, so every slide sits
    in the same canvas position regardless of what's inside (Styleguide v2 §2). */
-.reveal .slides > section { text-align: left; padding: var(--frame-side) var(--frame-side) var(--frame-bottom); box-sizing: border-box; }
+.reveal .slides > section { text-align: left; padding: var(--frame-side) var(--frame-side) var(--frame-bottom); box-sizing: border-box; display: flex; flex-direction: column; }
 .reveal .slides > section.title-slide,
 .reveal .slides > section.closing { text-align: center; padding: 0; }
 /* Head zone: title + subline reserve a consistent vertical rhythm before content starts */
 .reveal .slides > section h2 { min-height: calc(var(--head-zone) - 56px - 18px); }
 .reveal .slides > section .subline { padding-bottom: 18px; border-bottom: 1px solid var(--card-border); }
+/* Elemente schrumpfen auf ihren Inhalt und zentrieren sich als Gruppe vertikal in der
+   Inhaltszone (Styleguide v2 Prinzip 3) — einzige Ausnahme ist E1 KPI-Reihe (volle Höhe). */
+.content-zone { flex: 1; display: flex; flex-direction: column; justify-content: center; min-height: 0; }
+.content-zone > .metric-row { flex: 1; }
 
 /* Tables: no cell borders, rounded header row (border-collapse: separate) */
 .reveal table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 0.82em; margin: 0.4em 0; }
@@ -329,7 +333,7 @@ body.nav-invert #progress-fill                    { background: #fff; }
 
 /* ── E1 — KPI-Reihe (figures) ─────────────────── */
 .metric-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
-.metric { border-left: 3px solid var(--card-border); padding-left: 18px; text-align: left; }
+.metric { border-left: 3px solid var(--card-border); padding-left: 18px; text-align: left; display: flex; flex-direction: column; justify-content: center; }
 .metric .val { font-size: 2em; font-weight: 800; color: var(--ink); line-height: 1; }
 .metric .lbl { font-size: 0.62em; color: var(--ink-soft); margin-top: 8px; line-height: 1.4; }
 .metric.good .val { border-left-color: var(--positive); }

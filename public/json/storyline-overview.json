@@ -52,6 +52,20 @@
               ]
             }
           ]
+        },
+        {
+          "title": "Inhalt",
+          "subtitle": "Kennzahlen, Analyse, Rückschlüsse",
+          "content": [
+            {
+              "type": "agenda",
+              "items": [
+                "Kennzahlen — Aktueller Überblick der Lage",
+                "Analyse — Identifizierung von Häufungen (Airlines, Zeiträume)",
+                "Rückschlüsse — Handlungsempfehlungen"
+              ]
+            }
+          ]
         }
       ]
     },
@@ -95,6 +109,21 @@
       "nav_label": "Airlines",
       "slides": [
         {
+          "title": "Ranking nach Ø-Verspätung",
+          "content": [
+            {
+              "type": "chart_refs",
+              "items": [
+                {
+                  "label": "Airline-Ranking nach Ø-Verspätung",
+                  "source": "page-07-left",
+                  "caption": "13 Fluggesellschaften sortiert nach Ø-Verspätung in Minuten. Top 3: Envoy Air, Frontier Airlines, JetBlue Airways."
+                }
+              ]
+            }
+          ]
+        },
+        {
           "title": "Anteil der Top-3 an der Gesamtverspätung",
           "content": [
             {
@@ -124,6 +153,21 @@
     {
       "nav_label": "Zeitliche Muster",
       "slides": [
+        {
+          "title": "Anzahl Verspätungen — aggregiert",
+          "content": [
+            {
+              "type": "chart_refs",
+              "items": [
+                {
+                  "label": "Anzahl Verspätungen, aggregiert",
+                  "source": "page-10-left",
+                  "caption": "Nach Jahr/Quartal/Monat/Tag, mit On-Time-Performance-Linie (~28–32 %)."
+                }
+              ]
+            }
+          ]
+        },
         {
           "title": "Erkenntnisse Zeitebenen",
           "content": [

@@ -18,7 +18,7 @@ chapters:
     nav_label: Projektrahmen
     slides:
       - id: projektrahmen-cover
-        views: [overview, storyview]
+        views: [overview, storyview, techview]
         role: title
         title: "fLAirport"
         subtitle:
@@ -33,7 +33,7 @@ chapters:
               - {value: "26,42 Min.", label: "Ø Verspätung pro Flug", sentiment: warning}
 
       - id: projektrahmen-inhalt
-        views: [storyview]
+        views: [overview, storyview, techview]
         title: "Inhalt"
         subtitle: "Kennzahlen, Analyse, Rückschlüsse"
         content:
@@ -183,7 +183,7 @@ chapters:
     nav_label: Airlines
     slides:
       - id: airlines-ranking
-        views: [storyview, techview]
+        views: [storyview, techview, overview]
         title: "Ranking nach Ø-Verspätung"
         content:
           - type: chart_refs
@@ -244,7 +244,7 @@ chapters:
     nav_label: Zeitliche Muster
     slides:
       - id: zeitmuster-anzahl-aggregiert
-        views: [storyview, techview]
+        views: [storyview, techview, overview]
         title: "Anzahl Verspätungen — aggregiert"
         content:
           - type: chart_refs
