@@ -33,5 +33,14 @@ Metriken, Findings, Outputs gehören in `report/report_extract_final.md` / `publ
   pyyaml` für die 3 Scripts die PyYAML brauchen — kein eigenes `pyproject.toml`, da BI-Export ohne
   Python-Paket) — Hub (`index.html`) + 3 View-HTMLs generiert, im Browser verifiziert (Preview,
   keine Konsolenfehler), kleiner Fix: doppelter Zeitraum in Hub-Subtitle behoben
-- Nächster Schritt: Kay-Review der generierten Artefakte, dann Commit + Push nach
-  `git@github.com:kaywiegand/fl-airport-company.git`, danach `docs/PROJECTS.md`-Status update
+- Committet + gepusht nach `git@github.com:kaywiegand/fl-airport-company.git` (2 Commits:
+  Fundament+Visuals, dann Story+Slides+Report)
+- Overview-Storyline-Lücke gefunden + behoben: Cover/Inhalt fehlten in allen 3 Views,
+  Airline-Ranking- und Zeitmuster-Chart fehlten in Overview (nur Text-Pointe ohne Beleg-Chart) —
+  ergänzt, damit jeder Proof-Schritt der These mindestens einen Chart hat
+- README auf Portfolio-Standard gebracht (zh-tram-flow-Struktur als Referenz): Where-to-start-
+  Tabelle, Reports & Artifacts (Links zu Hub/Overview/StoryView/TechView — fehlten komplett,
+  obwohl die Pipeline schon fertig gebaut war), Tech-Stack-Tabelle, Table of Contents, Author-
+  Section ergänzt
+- Nächster Schritt: GitHub Pages manuell in den Repo-Settings aktivieren (kein `gh`-CLI hier
+  verfügbar für automatisches Setup), danach `docs/PROJECTS.md`-Status auf `✅ portfolio-ready`
