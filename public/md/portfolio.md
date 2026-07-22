@@ -9,7 +9,7 @@
 ## Project
 
 ```
-name:       fLAirport — Analyse unpünktlicher Flüge
+name:       fLAirport
 slug:       fl-airport-company
 type:       DA
 stage:      Phase 3 — Story (Portfolio-Aufbereitung)
@@ -66,7 +66,7 @@ problem_statement: |
 finding:   70 % aller LAX-Flüge sind unpünktlich (≥ 5 Min., zu früh oder zu spät); OTP 29,85 %,
            Ø-Verspätung 26,42 Min./Flug (Ankunft 26,51 / Abflug 26,30)
 number:    886.882 von 1.264.229 Flügen (70 %)
-source:    report/report_extract_final.md (Seite 3, 5, 6)
+source:    docs/report-extract.md (Seite 3, 5, 6)
 ```
 
 ### F2 — Airline-Indikator-Verzerrung
@@ -75,7 +75,7 @@ finding:   Die drei Airlines mit der höchsten Ø-Verspätung pro Flug (Envoy Ai
            Airlines, JetBlue Airways) tragen nur zu einem kleinen Bruchteil zur
            Gesamtverspätung bei — der Indikator ignoriert die Flughäufigkeit
 number:    3,51 % Anteil an allen Verspätungen
-source:    report/report_extract_final.md (Seite 7–9)
+source:    docs/report-extract.md (Seite 7–9)
 ```
 
 ### F3 — Saisonales Muster
@@ -83,7 +83,7 @@ source:    report/report_extract_final.md (Seite 7–9)
 finding:   Deutlicher Anstieg der Verspätungen in Q2, Peak in Q3, niedrigster Wert in Q1 —
            Feiertage/Urlaubszeiten lassen sich in den Daten klar ablesen
 number:    Q1 = Minimum, Q3 = Peak
-source:    report/report_extract_final.md (Seite 10–11, 14)
+source:    docs/report-extract.md (Seite 10–11, 14)
 ```
 
 ### F4 — Wochentagsmuster
@@ -91,7 +91,7 @@ source:    report/report_extract_final.md (Seite 10–11, 14)
 finding:   Samstag hat die deutlich geringste Anzahl/Summe an Verspätungen; Freitag, Sonntag
            und Montag steigen wieder deutlich an
 number:    Samstag = wöchentliches Minimum
-source:    report/report_extract_final.md (Seite 12, 14)
+source:    docs/report-extract.md (Seite 12, 14)
 ```
 
 ### F5 — Tagesmuster
@@ -99,7 +99,7 @@ source:    report/report_extract_final.md (Seite 12, 14)
 finding:   Verspätungen häufen sich morgens (6–9 Uhr) und am späten Nachmittag — passend zum
            typischen Arbeitszeit-Rhythmus im Flugbetrieb
 number:    Peak 6–9 Uhr
-source:    report/report_extract_final.md (Seite 13–14)
+source:    docs/report-extract.md (Seite 13–14)
 ```
 
 ### F6 — Richtungssplit

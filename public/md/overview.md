@@ -1,6 +1,6 @@
-# fLAirport — Analyse unpünktlicher Flüge
+# fLAirport
 
-**Projekt:** fLAirport — Analyse unpünktlicher Flüge
+**Projekt:** fLAirport
 **Beschreibung:** Kennzahlen & Handlungsempfehlungen
 **Autor:** Kay Wiegand
 **Zielgruppe:** HR · Business · Hiring Manager
@@ -17,20 +17,23 @@
 
 # fLAirport
 
-**Analyse unpünktlicher Flüge**
-**Los Angeles International Airport, 2015–2017**
+**Analyse unpünktlicher Flüge | Los Angeles International Airport**
+**Power BI - Business Intelligence Analytics & Reporting | 2015–2017**
 
 * **1.264.229** — Flüge 2015–2017 (LAX)
 * **70 %** — unpünktlich (≥ 5 Min.)
 * **29,85 %** — On-Time Performance
 * **26,42 Min.** — Ø Verspätung pro Flug
 
-## Inhalt
-*Kennzahlen, Analyse, Rückschlüsse*
 
-1. Kennzahlen — Aktueller Überblick der Lage
-2. Analyse — Identifizierung von Häufungen (Airlines, Zeiträume)
-3. Rückschlüsse — Handlungsempfehlungen
+---
+
+### Einstieg
+
+## Analyse-Szenario
+*Diskussionsgrundlage für den Flughafenbetreiber fLAirport*
+
+> Routinemäßige Analyse der Verspätungen
 
 
 ---
@@ -41,43 +44,42 @@
 *1.264.229 Flüge, 2015–2017*
 
 
-## Kennzahlen im Detail
+## Verspätungen nach Richtung
+*Abflug- und Ankunftsverspätungen im Vergleich*
 
 
+## Kennzahlen im Überblick
+*Betroffene Airlines, Steigerung, On-Time Performance, Delay Index und Ø-Verspätung*
 
----
-
-### Airlines
-
-## Ranking nach Ø-Verspätung
-
-
-## Anteil der Top-3 an der Gesamtverspätung
-
-
-## Wichtige Erkenntnis: Indikator verzerrt
-
-> Die höchste durchschnittliche Unpünktlichkeit erlaubt eine gewisse Verzerrung der Werte und eignet sich nicht zuverlässig als Indikator. Airlines mit extremen Durchschnittsverspätungen haben oft nur wenige Flüge — ihr hoher Durchschnitt hat wenig Einfluss auf die Gesamtzahl der Verspätungen. Der Wert ignoriert die Häufigkeit verspäteter Flüge im Verhältnis zur Gesamtzahl.
+* **13** — Betroffene Fluggesellschaften
+* **29,85 %** — On-Time Performance
+* **18,54** — Delay Index
+* **+7,17 %** — Steigerung Verspätungen (22.135)
+* **809** — Ø Verspätungen pro Tag
+* **26,42 Min.** — Ø Verspätung pro Flug
 
 
 ---
 
-### Zeitliche Muster
+### Insights
 
-## Anzahl Verspätungen — aggregiert
+## Erkenntnisse aus der Betrachtung
+*Analyse der höchsten durchschnittlichen Unpünktlichkeit*
 
+
+## Wichtige Erkenntnis
+*Durchschnittliche Verspätung pro Flug zeigt die Schwere der Verspätung,<br>nicht die Häufigkeit und den Einfluss auf den Gesamtflugverkehr*
+
+> Indikator ist fragwürdig
+
+
+---
+
+### Insights
 
 ## Erkenntnisse Zeitebenen
+*Erkenntnisse aus den langfristigen und kurzfristigen Mustern im Überblick*
 
-* **Langfristig — Jahre, Quartale, Monate**
-  - Über die Jahre insgesamt steigende Verspätungen
-  - Saisonale Muster: Anstieg in Q2, Spitzenwerte in Q3, niedrigster Wert in Q1
-  - Feiertage und Urlaubszeiten lassen sich deutlich ablesen
-* **Kurzfristig — Wochentage, Tagesstunden**
-  - Tagesansicht zeigt starke OTP-Schwankungen — Unbeständigkeit im operativen Ablauf
-  - Samstag: deutlich geringste Anzahl und Summe an Verspätungen
-  - Freitag, Sonntag und Montag: Werte steigen wieder deutlich an
-  - Peaks am Morgen (6–7 und 8–9 Uhr) und am späten Nachmittag
 
 
 ---
@@ -85,7 +87,11 @@
 ### Empfehlungen
 
 ## Handlungsempfehlungen
-*Aus den gesammelten Erkenntnissen*
+*Drei konkrete Hebel für Planung, Ursachenforschung und Messung*
+
+
+## Handlungsempfehlungen
+*Drei konkrete Hebel für Planung, Ursachenforschung und Messung*
 
 
 
@@ -93,5 +99,7 @@
 
 ### Abschluss
 
-## Danke.
+## fLAirport
+*['Analyse unpünktlicher Flüge | Los Angeles International Airport', 'Power BI - Business Intelligence Analytics & Reporting | 2015–2017']*
 
+> Der richtige Indikator entscheidet

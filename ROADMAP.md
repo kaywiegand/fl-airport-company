@@ -17,7 +17,7 @@ Bisher nur Rohmaterial ohne eigenes Repo, ohne Fundament, ohne öffentliche Aufb
 - [x] Phase 1 — Fundament: eigenes Git-Repo, CLAUDE.md/README/BACKLOG/PROCESS_LOG, `.gitignore`
       für sensible Aufgaben-Infos
 - [x] Phase 2 — Visuals-Export: PDF-Seiten als PNG nach `public/img/`
-- [x] Phase 3 — Story: `public/md/portfolio.md` aus `report_extract_final.md` befüllt
+- [x] Phase 3 — Story: `public/md/portfolio.md` aus `docs/report-extract.md` befüllt
       (`project-case story`)
 - [x] Phase 4 — Slides: `public/md/slides.yaml` im Dialog erstellt (`project-case slides`) —
       3 Views (Overview/StoryView/TechView), TechView mit SQL/M/DAX-Platzhaltern (BACKLOG #1)

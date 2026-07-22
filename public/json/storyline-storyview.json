@@ -1,6 +1,6 @@
 {
   "meta": {
-    "project": "fLAirport — Analyse unpünktlicher Flüge",
+    "project": "fLAirport",
     "period": "2015–2017",
     "author": "Kay Wiegand",
     "github": "kaywiegand/fl-airport-company",
@@ -17,13 +17,15 @@
   "chapters": [
     {
       "nav_label": "Projektrahmen",
+      "nav_tick_label": "Projektrahmen",
       "slides": [
         {
           "role": "title",
+          "layout": "L6",
           "title": "fLAirport",
           "subtitle": [
-            "Analyse unpünktlicher Flüge",
-            "Los Angeles International Airport, 2015–2017"
+            "Analyse unpünktlicher Flüge | Los Angeles International Airport",
+            "Power BI - Business Intelligence Analytics & Reporting | 2015–2017"
           ],
           "content": [
             {
@@ -50,44 +52,84 @@
                   "sentiment": "warning"
                 }
               ]
+            },
+            {
+              "type": "view_teaser",
+              "label": "Vollständiger Report",
+              "description": "Der komplette Power-BI-Report inkl. Ergänzungen — alle Kennzahlen, Airline-Details und Zeitmuster."
             }
           ]
         },
         {
-          "title": "Inhalt",
-          "subtitle": "Kennzahlen, Analyse, Rückschlüsse",
+          "kicker": "Agenda",
+          "layout": "L6",
+          "title": "Inhaltsübersicht",
+          "subtitle": "Der vollständige Weg von den Bedingungen bis zu den Handlungsempfehlungen",
           "content": [
             {
               "type": "agenda",
               "items": [
-                "Kennzahlen — Aktueller Überblick der Lage",
-                "Analyse — Identifizierung von Häufungen (Airlines, Zeiträume)",
-                "Rückschlüsse — Handlungsempfehlungen"
+                "Einstieg",
+                "Kennzahlen",
+                "Analyse Verspätungen",
+                "Insights",
+                "Analyse Zeiträume",
+                "Insights",
+                "Empfehlungen",
+                "Ergänzungen"
               ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "nav_label": "Einstieg",
+      "nav_tick_label": "Einstieg",
+      "slides": [
+        {
+          "title": "Analyse-Szenario",
+          "subtitle": "Diskussionsgrundlage für den Flughafenbetreiber fLAirport",
+          "content": [
+            {
+              "type": "statement",
+              "layout": "lead_copy",
+              "text": "Routinemäßige Analyse der Verspätungen",
+              "copy": "Unpünktliche Flüge am größten Flughafen der Gesellschaft, dem Los Angeles International Airport, sollen routinemäßig untersucht werden. Um über verschiedene Abteilungen hinweg die gleiche Diskussionsgrundlage zu haben, soll ein für alle zugänglicher Bericht erstellt werden."
             }
           ]
         },
         {
-          "title": "Auftrag & Bedingungen",
-          "subtitle": "Rahmen der Analyse",
+          "title": "Analyse Bedingungen",
+          "subtitle": "In Abstimmung mit der Führungsebene wurden folgende Anforderungen an den Bericht herausgearbeitet",
+          "subtitle_width": "50ch",
           "content": [
             {
               "type": "sections",
+              "layout": "columns",
               "items": [
                 {
                   "label": "Betrachtungsraum",
                   "points": [
-                    "Nur Flüge von oder nach LAX (geplante An-/Abflugzeiten)",
+                    "Nur Flüge von oder nach LAX",
                     "Zeitraum 2015–2017",
-                    "Gestrichene oder umgeleitete Flüge ausgeschlossen"
+                    "Keine gestrichenen oder umgeleiteten Flüge"
+                  ]
+                },
+                {
+                  "label": "Anforderungen",
+                  "points": [
+                    "Übersicht Kennzahlen",
+                    "Top 3 der unpünktlichen Airlines mit Unpünktlichkeitsrate",
+                    "Zeiträume mit gehäuft starker Unpünktlichkeit",
+                    "Informationen getrennt nach Abflug und Ankunft"
                   ]
                 },
                 {
                   "label": "Definition Unpünktlichkeit",
                   "points": [
                     "≥ 5 Minuten Abweichung von der geplanten Zeit",
-                    "Gilt für zu früh UND zu spät",
-                    "Getrennte Betrachtung nach Abflug/Ankunft möglich"
+                    "Gilt für zu früh UND zu spät"
                   ]
                 }
               ]
@@ -98,6 +140,7 @@
     },
     {
       "nav_label": "Kennzahlen",
+      "nav_tick_label": "Kennzahlen",
       "slides": [
         {
           "title": "Gesamtüberblick",
@@ -108,7 +151,8 @@
               "items": [
                 {
                   "label": "Gesamtanzahl Flüge & Pünktlichkeits-Split",
-                  "source": "page-03",
+                  "source": "kpi-1.jpg",
+                  "width": "70%",
                   "caption": "1.264.229 Flüge 2015–2017 an LAX — 377.347 pünktlich (30 %), 886.882 verspätet (70 %)."
                 }
               ]
@@ -117,13 +161,15 @@
         },
         {
           "title": "Verspätungen nach Richtung",
+          "subtitle": "Abflug- und Ankunftsverspätungen im Vergleich",
           "content": [
             {
               "type": "chart_refs",
               "items": [
                 {
                   "label": "Verspätungen Abflug/Ankunft/Gesamt",
-                  "source": "page-04",
+                  "source": "kpi-2.jpg",
+                  "width": "70%",
                   "caption": "368.669 Abflug- und 518.213 Ankunftsverspätungen, zusammen 886.882."
                 }
               ]
@@ -132,14 +178,16 @@
         },
         {
           "title": "Kennzahlen im Detail",
+          "subtitle": "Betroffene Airlines, Steigerung, On-Time Performance und Delay Index",
           "content": [
             {
               "type": "chart_refs",
               "items": [
                 {
-                  "label": "OTP, Delay Index, betroffene Airlines",
-                  "source": "page-05",
-                  "caption": "13 betroffene Fluggesellschaften, On-Time Performance 29,85 %, Delay Index 18,54."
+                  "label": "Airlines, Steigerung, OTP, Delay Index",
+                  "source": "kpi-3.jpg",
+                  "width": "70%",
+                  "caption": "13 betroffene Fluggesellschaften, +7,17 % Verspätungen ggü. Vorjahr, On-Time Performance 29,85 %, Delay Index 18,54."
                 }
               ]
             }
@@ -147,14 +195,16 @@
         },
         {
           "title": "Verspätung pro Tag und Flug",
+          "subtitle": "Durchschnittswerte über den gesamten Betrachtungszeitraum",
           "content": [
             {
               "type": "chart_refs",
               "items": [
                 {
                   "label": "Verspätungen pro Tag / pro Flug",
-                  "source": "page-06",
-                  "caption": "Ø 26,42 Minuten Verspätung pro Flug (Ankunft 26,51 / Abflug 26,30)."
+                  "source": "kpi-4.jpg",
+                  "width": "70%",
+                  "caption": "Ø 809 Verspätungen pro Tag, Ø 26,42 Minuten Verspätung pro Flug."
                 }
               ]
             }
@@ -163,244 +213,192 @@
       ]
     },
     {
-      "nav_label": "Airlines",
+      "nav_label": "Analyse Verspätungen",
+      "nav_tick_label": "Analyse Verspätungen",
       "slides": [
         {
-          "title": "Ranking nach Ø-Verspätung",
+          "title": "Ø-Verspätung je Airline",
+          "subtitle": "13 Fluggesellschaften, Top-3-Anteil an der Gesamtverspätung",
           "content": [
             {
               "type": "chart_refs",
               "items": [
                 {
-                  "label": "Airline-Ranking nach Ø-Verspätung",
-                  "source": "page-07-left",
-                  "caption": "13 Fluggesellschaften sortiert nach Ø-Verspätung in Minuten. Top 3: Envoy Air, Frontier Airlines, JetBlue Airways."
+                  "label": "Airline-Ranking nach Ø-Verspätung + Top-3-Anteil",
+                  "source": "airline-delays.jpg",
+                  "width": "80%",
+                  "caption": "13 Fluggesellschaften sortiert nach Ø-Verspätung in Minuten. Top 3 (Envoy Air, Frontier Airlines, JetBlue Airways) = 31.092 von 886.882 Verspätungen = 3,51 %."
                 }
               ]
             }
           ]
-        },
+        }
+      ]
+    },
+    {
+      "nav_label": "Insights",
+      "nav_tick_label": "Insights",
+      "slides": [
         {
-          "title": "Anteil der Top-3 an der Gesamtverspätung",
+          "title": "Erkenntnisse aus der Betrachtung",
+          "subtitle": "Analyse der höchsten durchschnittlichen Unpünktlichkeit",
           "content": [
             {
-              "type": "chart_refs",
+              "type": "box_grid",
+              "heading": "Beobachtungen",
               "items": [
-                {
-                  "label": "Anteil Top-3 an Gesamtverspätung",
-                  "source": "page-07-right",
-                  "caption": "31.092 von 886.882 Verspätungen = 3,51 % — die 'unpünktlichsten' Airlines sind kaum relevant für die Gesamtzahl."
-                }
+                "Insgesamt kommen EnvoyAir, Frontier Airline und JetBlue Airways auf nur <strong>3,51 %</strong> der Gesamtzahl an Verspätungen.",
+                "Betrachtet man den Zeitraum <strong>2016-2017</strong>, in denen EnvoyAir und US Airways entfallen, wird der Einfluss deutlicher.",
+                "Auch bei einzelner Betrachtung von <strong>Ankunft und Abflug</strong> variieren die Anteile an der Anzahl der Gesamtverspätung deutlich."
               ]
-            }
-          ]
-        },
-        {
-          "title": "Erkenntnisse: Anteil variiert",
-          "content": [
+            },
             {
-              "type": "sections",
+              "type": "rings",
               "items": [
                 {
-                  "label": "Beobachtungen",
-                  "points": [
-                    "Insgesamt kommen Envoy Air, Frontier Airlines und JetBlue Airways auf nur 3,51 % der Gesamtzahl an Verspätungen",
-                    "Betrachtet man 2016–2017 (ohne Envoy Air und US Airways), wird der Einfluss deutlicher",
-                    "Auch bei getrennter Betrachtung von Ankunft und Abflug variieren die Anteile deutlich",
-                    "2016–2017 höchste Ø-Unpünktlichkeit: American Airlines, Frontier Airlines, JetBlue Airways — Anteil an der Gesamtzahl: 22,31 %"
-                  ]
+                  "value": "22,31 %",
+                  "percent": 22.31,
+                  "label": "2016–2017 Anteil an der Gesamtzahl der Verspätungen"
+                }
+              ]
+            },
+            {
+              "type": "box_grid",
+              "items": [
+                {
+                  "text": "<strong>2016–2017</strong> höchste durchschnittliche Unpünktlichkeit:<ul><li>American Airlines</li><li>Frontier Airline</li><li>JetBlue Airways</li></ul>",
+                  "highlight": true
                 }
               ]
             }
           ]
         },
         {
-          "title": "Wichtige Erkenntnis: Indikator verzerrt",
+          "title": "Wichtige Erkenntnis",
+          "subtitle": "Durchschnittliche Verspätung pro Flug zeigt die Schwere der Verspätung,<br>nicht die Häufigkeit und den Einfluss auf den Gesamtflugverkehr",
+          "subtitle_width": "70ch",
           "content": [
             {
               "type": "statement",
-              "sentiment": "warning",
-              "text": "Die höchste durchschnittliche Unpünktlichkeit erlaubt eine gewisse Verzerrung der Werte und eignet sich nicht zuverlässig als Indikator. Airlines mit extremen Durchschnittsverspätungen haben oft nur wenige Flüge — ihr hoher Durchschnitt hat wenig Einfluss auf die Gesamtzahl der Verspätungen. Der Wert ignoriert die Häufigkeit verspäteter Flüge im Verhältnis zur Gesamtzahl."
+              "layout": "lead_copy",
+              "text": "Indikator ist fragwürdig",
+              "copy": [
+                "Die höchste durchschnittliche Unpünktlichkeit erlaubt eine gewisse Verzerrung der Werte und eignet sich somit nicht zuverlässig als Indikator. Airlines mit extremen Durchschnittsverspätungen haben oft nur wenige Flüge. Ihr hoher Durchschnitt hat wenig Einfluss auf die Gesamtzahl der Verspätungen.",
+                "Der Wert ignoriert die Häufigkeit verspäteter Flüge im Verhältnis zur Gesamtzahl."
+              ]
             }
           ]
         }
       ]
     },
     {
-      "nav_label": "Zeitliche Muster",
+      "nav_label": "Analyse Zeiträume",
+      "nav_tick_label": "Analyse Zeiträume",
       "slides": [
         {
-          "title": "Anzahl Verspätungen — aggregiert",
+          "title": "Aggregierte Betrachtung",
+          "subtitle": "Jahre, Quartale, Monate, Tage",
           "content": [
             {
               "type": "chart_refs",
               "items": [
                 {
-                  "label": "Anzahl Verspätungen, aggregiert",
-                  "source": "page-10-left",
-                  "caption": "Nach Jahr/Quartal/Monat/Tag, mit On-Time-Performance-Linie (~28–32 %)."
+                  "label": "Anzahl & Summe aller Verspätungen, aggregiert",
+                  "source": "time-year.jpg",
+                  "width": "100%",
+                  "caption": "Anzahl aller Verspätungen nach Monat (aggregiert über 2015–2017) mit On-Time-Performance-Linie, sowie Summe im Wochenverlauf."
                 }
               ]
             }
           ]
         },
         {
-          "title": "Summe Verspätungen — aggregiert",
+          "title": "Kontinuierliche Betrachtung",
+          "subtitle": "Jahre, Quartale, Monate, Tage im Verlauf",
           "content": [
             {
               "type": "chart_refs",
               "items": [
                 {
-                  "label": "Summe Verspätungen, aggregiert",
-                  "source": "page-10-right",
-                  "caption": "Nach Jahr/Quartal/Monat/Tag, 0–0,7 Mio. Verspätungsminuten."
+                  "label": "Anzahl & Summe aller Verspätungen, kontinuierlich",
+                  "source": "time-month.jpg",
+                  "width": "100%",
+                  "caption": "Anzahl aller Verspätungen 2015–2017 im Monatsverlauf, sowie Summe im Tagesdetail Januar/Februar 2015."
                 }
               ]
             }
           ]
         },
         {
-          "title": "Anzahl Verspätungen — kontinuierlich",
+          "title": "Wochenansicht der Verspätungen",
+          "subtitle": "Anzahl und Summe nach Wochentag, mit On-Time Performance",
           "content": [
             {
               "type": "chart_refs",
               "items": [
                 {
-                  "label": "Anzahl Verspätungen, kontinuierlich",
-                  "source": "page-11-top",
-                  "caption": "Q1–Q4, 2015–2017 im Verlauf."
+                  "label": "Wochenansicht — Anzahl & Summe, mit On-Time Performance",
+                  "source": "time-week.jpg",
+                  "width": "100%",
+                  "caption": "Mo–So: Samstag mit der deutlich geringsten Anzahl und Summe an Verspätungen, Freitag/Sonntag/Montag am höchsten."
                 }
               ]
             }
           ]
         },
         {
-          "title": "Summe Verspätungen — kontinuierlich",
+          "title": "Tagesansicht der Verspätungen",
+          "subtitle": "Verlauf nach Uhrzeit (0–23 Uhr)",
           "content": [
             {
               "type": "chart_refs",
               "items": [
                 {
-                  "label": "Summe Verspätungen, kontinuierlich",
-                  "source": "page-11-bottom",
-                  "caption": "Detailansicht Januar/Februar 2015 auf Tagesebene."
+                  "label": "Tagesansicht — Anzahl & Summe nach Uhrzeit",
+                  "source": "time-day.jpg",
+                  "width": "100%",
+                  "caption": "Deutliche Spitzen am Morgen (6–9 Uhr) und am späten Nachmittag, mit starken OTP-Schwankungen im Tagesverlauf."
                 }
               ]
             }
           ]
-        },
-        {
-          "title": "Wochenansicht — Anzahl (Linie)",
-          "content": [
-            {
-              "type": "chart_refs",
-              "items": [
-                {
-                  "label": "Anzahl Verspätungen, Wochenansicht",
-                  "source": "page-12-tl",
-                  "caption": "Mo–So, 105–135 Tsd. Verspätungen."
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "title": "Wochenansicht — Anzahl mit OTP",
-          "content": [
-            {
-              "type": "chart_refs",
-              "items": [
-                {
-                  "label": "Anzahl Verspätungen mit On-Time Performance",
-                  "source": "page-12-tr",
-                  "caption": "Mo–So, On-Time Performance ~29–31 %."
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "title": "Wochenansicht — Summe (Linie)",
-          "content": [
-            {
-              "type": "chart_refs",
-              "items": [
-                {
-                  "label": "Summe Verspätungen, Wochenansicht",
-                  "source": "page-12-bl",
-                  "caption": "Mo–So, Summe der Verspätungsminuten."
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "title": "Wochenansicht — Summe mit OTP",
-          "content": [
-            {
-              "type": "chart_refs",
-              "items": [
-                {
-                  "label": "Summe Verspätungen mit On-Time Performance",
-                  "source": "page-12-br",
-                  "caption": "Mo–So, On-Time Performance ~29 %."
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "title": "Tagesansicht — Anzahl nach Uhrzeit",
-          "content": [
-            {
-              "type": "chart_refs",
-              "items": [
-                {
-                  "label": "Anzahl Verspätungen, Tagesansicht",
-                  "source": "page-13-top",
-                  "caption": "Stundenverlauf 0–23 Uhr, Peaks 6–9 Uhr und später Nachmittag."
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "title": "Tagesansicht — Summe nach Uhrzeit",
-          "content": [
-            {
-              "type": "chart_refs",
-              "items": [
-                {
-                  "label": "Summe Verspätungen, Tagesansicht",
-                  "source": "page-13-bottom",
-                  "caption": "Stundenverlauf 0–23 Uhr."
-                }
-              ]
-            }
-          ]
-        },
+        }
+      ]
+    },
+    {
+      "nav_label": "Insights",
+      "nav_tick_label": "Insights",
+      "slides": [
         {
           "title": "Erkenntnisse Zeitebenen",
+          "subtitle": "Erkenntnisse aus den langfristigen und kurzfristigen Mustern im Überblick",
           "content": [
             {
-              "type": "sections",
+              "type": "box_grid",
+              "heading": "Beobachtungen",
               "items": [
                 {
-                  "label": "Langfristig — Jahre, Quartale, Monate",
-                  "points": [
-                    "Über die Jahre insgesamt steigende Verspätungen",
-                    "Saisonale Muster: Anstieg in Q2, Spitzenwerte in Q3, niedrigster Wert in Q1",
-                    "Feiertage und Urlaubszeiten lassen sich deutlich ablesen"
-                  ]
+                  "text": "<strong>Langfristige Zeitebene</strong><br>Betrachtung Jahre, Quartale und Monate<ul><li>Über die Jahre insgesamt steigende Verspätungen</li><li>Saisonale Muster: Anstieg in Q2, Spitzenwerte in Q3, niedrigster Wert in Q1</li><li>Feiertage und Urlaubszeiten lassen sich deutlich ablesen</li></ul>"
                 },
                 {
-                  "label": "Kurzfristig — Wochentage, Tagesstunden",
-                  "points": [
-                    "Tagesansicht zeigt starke OTP-Schwankungen — Unbeständigkeit im operativen Ablauf",
-                    "Samstag: deutlich geringste Anzahl und Summe an Verspätungen",
-                    "Freitag, Sonntag und Montag: Werte steigen wieder deutlich an",
-                    "Peaks am Morgen (6–7 und 8–9 Uhr) und am späten Nachmittag"
-                  ]
+                  "text": "<strong>Kurzfristige Zeitebene</strong><br>Betrachtung Wochen, Tage und Stunden<ul><li>Tagesansicht zeigt starke OTP-Schwankungen</li><li>Samstags geringere Anzahl & Summe an Verspätungen</li><li>Fr., So. und Mo.: Werte steigen wieder deutlich an</li><li>Rushhour Peaks deutlich von 6–7 und 8–9 Uhr</li></ul>"
+                }
+              ]
+            },
+            {
+              "type": "box_grid",
+              "items": [
+                {
+                  "text": "Mehrere deutliche <strong>wiederkehrende Muster</strong> erkennbar, vor allem saisonal in Quartalen und Monaten.",
+                  "highlight": true
+                },
+                {
+                  "text": "Häufungen durch typischen <strong>Arbeitszeit-Rhythmus</strong> lassen sich auf Wochen- und Tagesebene deutlich erkennen.",
+                  "highlight": true
+                },
+                {
+                  "text": "<strong>Einzelne Auffälligkeiten</strong> erwecken Aufmerksamkeit, etwa Spitzen in der kontinuierlichen Betrachtung.",
+                  "highlight": true
                 }
               ]
             }
@@ -410,10 +408,11 @@
     },
     {
       "nav_label": "Empfehlungen",
+      "nav_tick_label": "Empfehlungen",
       "slides": [
         {
           "title": "Handlungsempfehlungen",
-          "subtitle": "Aus den gesammelten Erkenntnissen",
+          "subtitle": "Drei konkrete Hebel für Planung, Ursachenforschung und Messung",
           "content": [
             {
               "type": "recommendations",
@@ -422,28 +421,152 @@
                   "category": "Operative Planung optimieren",
                   "title": "Saisonale und wöchentliche Muster in die Planung einbeziehen",
                   "points": [
-                    "Analysierte langfristige saisonale Häufungen sowie Erkenntnisse aus Wochen- und Tagesansicht verstärkt berücksichtigen",
-                    "Spitzenwerten gezielt vorbeugen",
-                    "→ Informationen teilen und in Planungen berücksichtigen"
+                    "Analysierte langfristige saisonale Häufungen und Erkenntnisse aus Wochen- und Tagesansicht in Planungen verstärkt berücksichtigen und Spitzenwerten vorbeugen."
                   ]
                 },
                 {
                   "category": "Research fortführen",
                   "title": "Ursachen extremer Ausreißer klären",
                   "points": [
-                    "Teils extreme Spitzen in Anzahl und Summe der Verspätungen erkennbar",
-                    "Auslöser sollten aufgeklärt werden, um Wiederholungen zu vermeiden",
-                    "→ Erkundigungen bei Fachabteilungen einholen"
+                    "Es lassen sich teils extreme Spitzen in der Anzahl und der Summe der Verspätungen erkennen. Die Auslöser sollten aufgeklärt werden, um Wiederholungen zu vermeiden."
                   ]
-                },
+                }
+              ]
+            },
+            {
+              "type": "box_grid",
+              "items": [
+                "→ Informationen teilen und berücksichtigen",
+                "→ Erkundigungen bei Fachabteilungen einholen"
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Handlungsempfehlungen",
+          "subtitle": "Drei konkrete Hebel für Planung, Ursachenforschung und Messung",
+          "content": [
+            {
+              "type": "recommendations",
+              "items": [
                 {
                   "category": "Indikator verbessern",
-                  "title": "Aussagekräftigere Kennzahlen kombinieren",
+                  "title": "Einen gewichteten Leistungsindikator ergänzen",
                   "points": [
-                    "Ø-Verspätung pro Flug zeigt die Schwere, nicht die Häufigkeit oder den Einfluss auf den Gesamtflugverkehr",
-                    "Sinnvolle Kombinationen: On-Time Performance & Summe, Anzahl & Summe, Delay Index",
-                    "→ Identifikation geeigneter Indikatoren"
+                    "Durchschnittliche Verspätung pro Flug zeigt die Schwere der Verspätung, nicht die Häufigkeit und den Einfluss auf den Gesamtflugverkehr.",
+                    "Ein gewichteter Leistungsindikator (Weighted KPI) hingegen kombiniert diese Faktoren zu einer Gesamtaussage."
                   ]
+                }
+              ]
+            },
+            {
+              "type": "box_grid",
+              "items": [
+                "→ Identifikation geeigneter Indikatoren<br><br>Sinnvolle Metriken für den Überblick der Häufigkeit und Intensität:<ul><li>OTP & Summe Verspätungen</li><li>Anzahl & Summe Verspätungen</li><li>Delay-Index Airlines</li></ul>"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "nav_label": "Ergänzungen",
+      "nav_tick_label": "Ergänzungen",
+      "slides": [
+        {
+          "title": "Bemerkungen zu den Ergänzungen",
+          "subtitle": "Was die vier zusätzlichen Airline-Ansichten sichtbar machen",
+          "content": [
+            {
+              "type": "h_timeline",
+              "show_labels": false,
+              "items": [
+                {},
+                {},
+                {}
+              ]
+            },
+            {
+              "type": "text_columns",
+              "items": [
+                {
+                  "heading": "On-Time-Performance",
+                  "text": "OTP je Airline (statt nur gesamt) zeigt: Die On-Time Performance schwankt zwischen den 13 Fluggesellschaften spürbar zwischen rund 22 % und 34 % — eine Ebene, die die aggregierte 29,85-%-Kennzahl verdeckt."
+                },
+                {
+                  "heading": "Verspätungs-Anzahl Ranking",
+                  "text": "Das reine Anzahl-Ranking (Southwest Airlines an der Spitze) zeigt ein anderes Bild als das Ø-Verspätungs-Ranking aus Kapitel 'Analyse Verspätungen' (Envoy Air an der Spitze) — bestätigt noch einmal, dass die Rangfolge stark vom gewählten Indikator abhängt."
+                },
+                {
+                  "heading": "Delay Index und Delay Rate",
+                  "text": "Delay Index (Ø 19,23) und Delay Rate (Ø 71,33 %) kombinieren Häufigkeit und Schwere zu je einer Kennzahl — genau die Art Kombinationsindikator, die die Empfehlung 'Indikator verbessern' fordert."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "On-Time Performance Airlines",
+          "subtitle": "Anzahl und Summe der Verspätungen je Fluggesellschaft, mit On-Time Performance",
+          "content": [
+            {
+              "type": "chart_refs",
+              "items": [
+                {
+                  "label": "OTP je Airline, nach Anzahl und Summe",
+                  "source": "airlines-otp.jpg",
+                  "caption": "On-Time Performance je Fluggesellschaft — Spanne von rund 22 % bis 34 %."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Ranking nach Anzahl der Verspätungen",
+          "subtitle": "Alle 13 Fluggesellschaften im direkten Vergleich",
+          "content": [
+            {
+              "type": "chart_refs",
+              "items": [
+                {
+                  "label": "Airlines nach absoluter Anzahl Verspätungen",
+                  "source": "airlines-delay-ranking.jpg",
+                  "width": "100%",
+                  "caption": "Alle 13 Fluggesellschaften sortiert nach absoluter Anzahl Verspätungen — Southwest Airlines an der Spitze."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Delay Index Airlines",
+          "subtitle": "Kombinierter Kennwert aus Häufigkeit und Schwere je Airline",
+          "content": [
+            {
+              "type": "chart_refs",
+              "items": [
+                {
+                  "label": "Delay Index je Airline",
+                  "source": "airlines-delay-index.jpg",
+                  "width": "100%",
+                  "caption": "Delay Index je Airline, Durchschnitt 19,23."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Delay Rate Airlines",
+          "subtitle": "Anteil verspäteter Flüge an der airline-eigenen Gesamtzahl",
+          "content": [
+            {
+              "type": "chart_refs",
+              "items": [
+                {
+                  "label": "Delay Rate je Airline",
+                  "source": "airlines-delay-rate.jpg",
+                  "width": "100%",
+                  "caption": "Delay Rate je Airline, Durchschnitt 71,33 %."
                 }
               ]
             }
@@ -453,104 +576,37 @@
     },
     {
       "nav_label": "Abschluss",
+      "nav_tick_label": "Abschluss",
       "slides": [
         {
           "role": "closing",
-          "title": "Danke.",
+          "title_from_hub": true,
+          "layout": "split",
           "content": [
             {
-              "type": "links",
-              "items": [
-                {
-                  "href": "report/Report-flAirport_v09.pdf",
-                  "label": "Vollständiger Report (PDF)"
-                },
-                {
-                  "href": "https://github.com/kaywiegand/fl-airport-company",
-                  "label": "GitHub Repo"
-                }
+              "type": "statement",
+              "layout": "lead_copy",
+              "text": "Der richtige Indikator entscheidet",
+              "copy": [
+                "Naheliegende Kennzahlen greifen oft zu kurz. Für die operative Planung sind saisonale und wochentägliche Muster verlässlicher als die Ø-Verspätung einzelner Airlines.",
+                "Kombinierte Metriken, wie der gewichtete Leistungsindikator, bilden Häufigkeit und Intensität gleichzeitig ab. Ein reiner Durchschnitt zeigt dagegen nur eine Dimension."
               ]
             }
-          ]
-        }
-      ]
-    },
-    {
-      "nav_label": "Anhang: Airline-Details",
-      "slides": [
-        {
-          "title": "On-Time Performance Airlines — Anzahl",
-          "content": [
+          ],
+          "closing_primary_link": {
+            "label": "Vollständiger Report (PDF)",
+            "href": "report/Report-flAirport_v09.pdf"
+          },
+          "closing_extra_links": [
             {
-              "type": "chart_refs",
-              "items": [
-                {
-                  "label": "OTP Airlines nach Anzahl",
-                  "source": "page-18-left",
-                  "caption": "Anzahl Verspätungen je Airline mit On-Time-Performance-Linie."
-                }
-              ]
+              "label": "LinkedIn-Profil",
+              "href": "https://www.linkedin.com/in/kaywiegand/"
             }
-          ]
-        },
-        {
-          "title": "On-Time Performance Airlines — Summe",
-          "content": [
-            {
-              "type": "chart_refs",
-              "items": [
-                {
-                  "label": "OTP Airlines nach Summe",
-                  "source": "page-18-right",
-                  "caption": "Summe Verspätungen je Airline mit On-Time-Performance-Linie."
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "title": "Ranking nach Anzahl der Verspätungen",
-          "content": [
-            {
-              "type": "chart_refs",
-              "items": [
-                {
-                  "label": "Ranking nach Anzahl",
-                  "source": "page-19",
-                  "caption": "Alle 13 Fluggesellschaften sortiert nach absoluter Anzahl Verspätungen."
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "title": "Delay Index Airlines",
-          "content": [
-            {
-              "type": "chart_refs",
-              "items": [
-                {
-                  "label": "Delay Index je Airline",
-                  "source": "page-20",
-                  "caption": "Delay Index je Airline, Durchschnitt 19,23."
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "title": "Delay Rate Airlines",
-          "content": [
-            {
-              "type": "chart_refs",
-              "items": [
-                {
-                  "label": "Delay Rate je Airline",
-                  "source": "page-21",
-                  "caption": "Delay Rate je Airline, Durchschnitt 71,33 %."
-                }
-              ]
-            }
+          ],
+          "title": "fLAirport",
+          "subtitle": [
+            "Analyse unpünktlicher Flüge | Los Angeles International Airport",
+            "Power BI - Business Intelligence Analytics & Reporting | 2015–2017"
           ]
         }
       ]

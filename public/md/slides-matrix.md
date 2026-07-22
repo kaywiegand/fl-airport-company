@@ -1,42 +1,38 @@
-# Slide-Matrix — fLAirport — Analyse unpünktlicher Flüge
+# Slide-Matrix — fLAirport
 
 Automatisch generiert aus `public/md/slides.yaml` via `scripts/print_slide_matrix.py`. Nicht von Hand editieren — bei jeder Registry-Änderung neu ausführen.
 
 | id | Kapitel | Inhalt | StoryView | TechView | Overview |
 |:---|:---|:---|:---:|:---:|:---:|
 | `projektrahmen-cover` | Projektrahmen | KPIs | ✅ | ✅ | ✅ |
-| `projektrahmen-inhalt` | Projektrahmen | Agenda | ✅ | ✅ | ✅ |
-| `projektrahmen-auftrag` | Projektrahmen | Abschnitte | ✅ | ✅ |  |
-| `tech-sql` | Technischer Ansatz | Abschnitte + Statement |  | ✅ |  |
-| `tech-mcode` | Technischer Ansatz | Schritte + Statement |  | ✅ |  |
-| `tech-dax` | Technischer Ansatz | KPIs + Statement |  | ✅ |  |
+| `projektrahmen-agenda` | Projektrahmen | Agenda | ✅ | ✅ |  |
+| `einstieg-szenario` | Einstieg | Statement | ✅ | ✅ | ✅ |
+| `einstieg-bedingungen` | Einstieg | Abschnitte | ✅ | ✅ |  |
+| `tech-sql` | Technischer Ansatz | code |  | ✅ |  |
+| `tech-mcode` | Technischer Ansatz | code |  | ✅ |  |
+| `tech-model` | Technischer Ansatz | Chart + Abschnitte |  | ✅ |  |
+| `tech-dax` | Technischer Ansatz | code |  | ✅ |  |
 | `kennzahlen-gesamt` | Kennzahlen | Chart | ✅ |  | ✅ |
-| `kennzahlen-richtung` | Kennzahlen | Chart | ✅ |  |  |
-| `kennzahlen-airlines-otp` | Kennzahlen | Chart | ✅ |  | ✅ |
+| `kennzahlen-richtung` | Kennzahlen | Chart | ✅ |  | ✅ |
+| `kennzahlen-overview-facts` | Kennzahlen | KPIs |  |  | ✅ |
+| `kennzahlen-airlines-otp` | Kennzahlen | Chart | ✅ |  |  |
 | `kennzahlen-dauer` | Kennzahlen | Chart | ✅ |  |  |
 | `kennzahlen-tech-merged` | Kennzahlen | KPIs |  | ✅ |  |
-| `airlines-ranking` | Airlines | Chart | ✅ | ✅ | ✅ |
-| `airlines-anteil` | Airlines | Chart | ✅ | ✅ | ✅ |
-| `airlines-erkenntnis-anteil` | Airlines | Abschnitte | ✅ |  |  |
-| `airlines-erkenntnis-indikator` | Airlines | Statement | ✅ |  | ✅ |
-| `airlines-tech-insights` | Airlines | Abschnitte + Statement |  | ✅ |  |
-| `zeitmuster-anzahl-aggregiert` | Zeitliche Muster | Chart | ✅ | ✅ | ✅ |
-| `zeitmuster-summe-aggregiert` | Zeitliche Muster | Chart | ✅ |  |  |
-| `zeitmuster-anzahl-kontinuierlich` | Zeitliche Muster | Chart | ✅ |  |  |
-| `zeitmuster-summe-kontinuierlich` | Zeitliche Muster | Chart | ✅ |  |  |
-| `zeitmuster-woche-anzahl-linie` | Zeitliche Muster | Chart | ✅ |  |  |
-| `zeitmuster-woche-anzahl-otp` | Zeitliche Muster | Chart | ✅ | ✅ |  |
-| `zeitmuster-woche-summe-linie` | Zeitliche Muster | Chart | ✅ |  |  |
-| `zeitmuster-woche-summe-otp` | Zeitliche Muster | Chart | ✅ |  |  |
-| `zeitmuster-tag-anzahl` | Zeitliche Muster | Chart | ✅ | ✅ |  |
-| `zeitmuster-tag-summe` | Zeitliche Muster | Chart | ✅ |  |  |
-| `zeitmuster-erkenntnisse` | Zeitliche Muster | Abschnitte | ✅ | ✅ | ✅ |
-| `empfehlungen-hauptteil` | Empfehlungen | Empfehlungen | ✅ |  | ✅ |
-| `closing-danke` | Abschluss | Links | ✅ |  | ✅ |
-| `anhang-otp-anzahl` | Anhang: Airline-Details | Chart | ✅ |  |  |
-| `anhang-otp-summe` | Anhang: Airline-Details | Chart | ✅ |  |  |
-| `anhang-ranking-anzahl` | Anhang: Airline-Details | Chart | ✅ |  |  |
-| `anhang-delay-index` | Anhang: Airline-Details | Chart | ✅ |  |  |
-| `anhang-delay-rate` | Anhang: Airline-Details | Chart | ✅ |  |  |
+| `verspaetungen-airline-delays` | Analyse Verspätungen | Chart | ✅ | ✅ |  |
+| `insights-verspaetungen-erkenntnisse` | Insights | box_grid + rings + box_grid | ✅ |  | ✅ |
+| `insights-verspaetungen-indikator` | Insights | Statement | ✅ |  | ✅ |
+| `zeitraeume-year` | Analyse Zeiträume | Chart | ✅ | ✅ |  |
+| `zeitraeume-month` | Analyse Zeiträume | Chart | ✅ |  |  |
+| `zeitraeume-week` | Analyse Zeiträume | Chart | ✅ | ✅ |  |
+| `zeitraeume-day` | Analyse Zeiträume | Chart | ✅ | ✅ |  |
+| `insights-zeitraeume-erkenntnisse` | Insights | box_grid + box_grid | ✅ | ✅ | ✅ |
+| `empfehlungen-hauptteil` | Empfehlungen | Empfehlungen + box_grid | ✅ |  | ✅ |
+| `empfehlungen-indikator` | Empfehlungen | Empfehlungen + box_grid | ✅ |  | ✅ |
+| `insights-airlines-bemerkungen` | Ergänzungen | h_timeline + text_columns | ✅ |  |  |
+| `airlines-otp` | Ergänzungen | Chart | ✅ |  |  |
+| `airlines-delay-ranking` | Ergänzungen | Chart | ✅ |  |  |
+| `airlines-delay-index` | Ergänzungen | Chart | ✅ |  |  |
+| `airlines-delay-rate` | Ergänzungen | Chart | ✅ |  |  |
+| `closing-danke` | Abschluss | Statement | ✅ |  | ✅ |
 
-**34 Slide-Einträge total · 14 davon in mehr als 1 View wiederverwendet.**
+**30 Slide-Einträge total · 16 davon in mehr als 1 View wiederverwendet.**

@@ -24,11 +24,18 @@ Struktur:
 
 - **Kein `notebooks/`, kein `src/[paket]/`** — die "Notebooks"-Sections in README/`project-case`
   entfallen bzw. werden zu "Power BI Report".
-- **`report/`** enthält das Original-Artefakt: `Report-flAirport_v09.pbix` (Power BI Datei) +
-  `Report-flAirport_v09.pdf` (Export) + `report_extract_final.md` (OCR-Extrakt des PDFs — Quelle
-  für alle Findings/Zahlen in README und `public/md/portfolio.md`).
-- **`public/img/page-NN.png`** — alle 21 PDF-Seiten als PNG exportiert (`pdftoppm -png -r 150`).
-  Kuration/Auswahl der Slide-relevanten Seiten passiert im `project-case slides`-Dialog.
+- **`report/`** — nur das Artefakt + saubere Code-Doku: `Report-flAirport_v09.pbix` (Power BI
+  Datei) · `Report-flAirport_v09.pdf` (Export) · `measures-dax.md` (DAX-Measures, refactored) ·
+  `etl-m-code.md` (SQL Native Query + Power Query, refactored).
+- **`data/raw/`** — Rohdaten + Herkunft: `UNIQUE_CARRIERS.csv` (Airline-Lookup) ·
+  `data-source.md` (Datenwörterbuch + Scope, sanitisiert, ohne Credentials).
+- **`docs/`** — Doku + Arbeitsnotizen (eingecheckt): `report-extract.md` (OCR-Extrakt des PDFs,
+  Quelle für Findings/Zahlen) · `dax-refactoring.md` / `m-code-refactoring.md` (IST-Extrakt +
+  Refactoring-Analyse, das "Warum" hinter der bereinigten Fassung in `report/`) ·
+  `techview-bausteine.md` (Kuration für die TechView-Slides).
+- **`public/img/page-NN.png`** — alle 21 PDF-Seiten als PNG exportiert (`pdftoppm -png -r 150`);
+  daneben die kuratierten Crops (`kpi-*.jpg`, `airline-delays.jpg`, `time-*.jpg`, `airlines-*.jpg`)
+  für die Slides.
 - **ML-Pflicht bei `project-case check` entfällt** (kein `notebooks/06_*`, kein `data/models/`) →
   Kategorie 5 ist `n.a.`.
 

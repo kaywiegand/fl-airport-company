@@ -1,7 +1,7 @@
 # PROCESS_LOG.md — fl-airport-company
 
 Verlauf + Entscheidungen. Pointer auf Files — kein Inhalt kopieren.
-Metriken, Findings, Outputs gehören in `report/report_extract_final.md` / `public/md/` — nicht hier.
+Metriken, Findings, Outputs gehören in `docs/report-extract.md` / `public/md/` — nicht hier.
 
 ---
 
@@ -21,7 +21,7 @@ Metriken, Findings, Outputs gehören in `report/report_extract_final.md` / `publ
   übernommen wurden und die verrauschte OCR-Extraktion an der Stelle korrigieren
 - Visuals-Export: alle 21 PDF-Seiten aus `report/Report-flAirport_v09.pdf` als PNG nach
   `public/img/page-01.png` … `page-21.png` (`pdftoppm -png -r 150`)
-- `project-case story`: `public/md/portfolio.md` aus `report/report_extract_final.md` befüllt,
+- `project-case story`: `public/md/portfolio.md` aus `docs/report-extract.md` befüllt,
   Kernthese mit Kay abgestimmt ("Ø-Verspätung pro Flug ist als alleiniger KPI irreführend")
 - `project-case slides`: `public/md/slides.yaml` im Kapitel-für-Kapitel-Dialog erstellt — 8
   Kapitel, 34 Slide-Einträge, 3 Views (Overview 8 · StoryView 29 · TechView 12 Slides).

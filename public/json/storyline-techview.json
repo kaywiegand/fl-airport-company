@@ -1,6 +1,6 @@
 {
   "meta": {
-    "project": "fLAirport — Analyse unpünktlicher Flüge",
+    "project": "fLAirport",
     "period": "2015–2017",
     "author": "Kay Wiegand",
     "github": "kaywiegand/fl-airport-company",
@@ -17,13 +17,15 @@
   "chapters": [
     {
       "nav_label": "Projektrahmen",
+      "nav_tick_label": "Projektrahmen",
       "slides": [
         {
           "role": "title",
+          "layout": "L6",
           "title": "fLAirport",
           "subtitle": [
-            "Analyse unpünktlicher Flüge",
-            "Los Angeles International Airport, 2015–2017"
+            "Analyse unpünktlicher Flüge | Los Angeles International Airport",
+            "Power BI - Business Intelligence Analytics & Reporting | 2015–2017"
           ],
           "content": [
             {
@@ -50,44 +52,84 @@
                   "sentiment": "warning"
                 }
               ]
+            },
+            {
+              "type": "view_teaser",
+              "label": "Technischer Deep-Dive",
+              "description": "SQL, Power Query und DAX-Measures (in Aufbau) plus die analytischen Kern-Charts."
             }
           ]
         },
         {
-          "title": "Inhalt",
-          "subtitle": "Kennzahlen, Analyse, Rückschlüsse",
+          "kicker": "Agenda",
+          "layout": "L6",
+          "title": "Inhaltsübersicht",
+          "subtitle": "Der vollständige Weg von den Bedingungen bis zu den Handlungsempfehlungen",
           "content": [
             {
               "type": "agenda",
               "items": [
-                "Kennzahlen — Aktueller Überblick der Lage",
-                "Analyse — Identifizierung von Häufungen (Airlines, Zeiträume)",
-                "Rückschlüsse — Handlungsempfehlungen"
+                "Einstieg",
+                "Kennzahlen",
+                "Analyse Verspätungen",
+                "Insights",
+                "Analyse Zeiträume",
+                "Insights",
+                "Empfehlungen",
+                "Ergänzungen"
               ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "nav_label": "Einstieg",
+      "nav_tick_label": "Einstieg",
+      "slides": [
+        {
+          "title": "Analyse-Szenario",
+          "subtitle": "Diskussionsgrundlage für den Flughafenbetreiber fLAirport",
+          "content": [
+            {
+              "type": "statement",
+              "layout": "lead_copy",
+              "text": "Routinemäßige Analyse der Verspätungen",
+              "copy": "Unpünktliche Flüge am größten Flughafen der Gesellschaft, dem Los Angeles International Airport, sollen routinemäßig untersucht werden. Um über verschiedene Abteilungen hinweg die gleiche Diskussionsgrundlage zu haben, soll ein für alle zugänglicher Bericht erstellt werden."
             }
           ]
         },
         {
-          "title": "Auftrag & Bedingungen",
-          "subtitle": "Rahmen der Analyse",
+          "title": "Analyse Bedingungen",
+          "subtitle": "In Abstimmung mit der Führungsebene wurden folgende Anforderungen an den Bericht herausgearbeitet",
+          "subtitle_width": "50ch",
           "content": [
             {
               "type": "sections",
+              "layout": "columns",
               "items": [
                 {
                   "label": "Betrachtungsraum",
                   "points": [
-                    "Nur Flüge von oder nach LAX (geplante An-/Abflugzeiten)",
+                    "Nur Flüge von oder nach LAX",
                     "Zeitraum 2015–2017",
-                    "Gestrichene oder umgeleitete Flüge ausgeschlossen"
+                    "Keine gestrichenen oder umgeleiteten Flüge"
+                  ]
+                },
+                {
+                  "label": "Anforderungen",
+                  "points": [
+                    "Übersicht Kennzahlen",
+                    "Top 3 der unpünktlichen Airlines mit Unpünktlichkeitsrate",
+                    "Zeiträume mit gehäuft starker Unpünktlichkeit",
+                    "Informationen getrennt nach Abflug und Ankunft"
                   ]
                 },
                 {
                   "label": "Definition Unpünktlichkeit",
                   "points": [
                     "≥ 5 Minuten Abweichung von der geplanten Zeit",
-                    "Gilt für zu früh UND zu spät",
-                    "Getrennte Betrachtung nach Abflug/Ankunft möglich"
+                    "Gilt für zu früh UND zu spät"
                   ]
                 }
               ]
@@ -98,117 +140,89 @@
     },
     {
       "nav_label": "Technischer Ansatz",
+      "nav_tick_label": "Technischer Ansatz",
       "slides": [
         {
-          "title": "Datenerhebung — SQL",
-          "subtitle": "PostgreSQL-Quelle, gefiltert beim Import",
+          "title": "Datenerhebung — SQL Native Query",
+          "subtitle": "Gefiltert an der Quelle, nicht clientseitig nachgezogen",
           "content": [
             {
-              "type": "sections",
+              "type": "code",
+              "layout": "code_left",
               "items": [
                 {
-                  "label": "Bekannte Filterlogik (Absicht — Native Query folgt)",
-                  "points": [
-                    "EXTRACT + WHERE — Eingrenzung auf Zeitraum 2015–2017",
-                    "WHERE — LAX als Origin oder Destination",
-                    "WHERE — Ausschluss gestrichener/umgeleiteter Flüge",
-                    "ABS() — Absolutwerte für Verspätungen",
-                    "CASE WHEN…THEN…ELSE — neue Spalte für Abflug-/Ankunft-Richtung"
-                  ]
+                  "label": "PostgreSQL · Native Query (EnableFolding)",
+                  "caption": "Query Folding delegiert die Filterung an PostgreSQL. Zeitraum, LAX-only und der Ausschluss gestrichener/umgeleiteter Flüge grenzen den Datensatz direkt an der Quelle ab. <strong>ABS()</strong> macht Verspätungen vorzeichenlos, sie zählen zu früh und zu spät gleichermaßen. <strong>fl_direction</strong> entsteht per CASE.",
+                  "code": "SELECT fl_date, EXTRACT(WEEK FROM fl_date) AS fl_week,\n       CASE WHEN dest   = 'LAX' THEN 'arrival'\n            WHEN origin = 'LAX' THEN 'departure' END AS fl_direction,\n       origin AS fl_origin,  dest AS fl_dest,\n       crs_dep_time AS raw_dep_crs, crs_arr_time AS raw_arr_crs,\n       dep_time AS raw_dep,         arr_time AS raw_arr,\n       ABS(dep_delay) AS delay_dep, ABS(arr_delay) AS delay_arr,\n       op_carrier\nFROM flights\nWHERE EXTRACT(YEAR FROM fl_date) BETWEEN 2015 AND 2017\n  AND (origin = 'LAX' OR dest = 'LAX')\n  AND cancelled = FALSE AND diverted = FALSE\n"
                 }
               ]
-            },
-            {
-              "type": "statement",
-              "sentiment": "warning",
-              "text": "🔧 Platzhalter — exakter SQL-Quelltext (Native Query) folgt aus Power BI Desktop. Siehe BACKLOG.md #1."
             }
           ]
         },
         {
           "title": "Datenbereinigung — Power Query (M)",
-          "subtitle": "Bekannte Schritt-Reihenfolge, Code folgt",
+          "subtitle": "Zeit-Parsing als Funktion, die ≥5-Minuten-Regel an genau einer Stelle",
           "content": [
             {
-              "type": "steps",
+              "type": "code",
+              "layout": "code_left",
               "items": [
                 {
-                  "step": "1",
-                  "label": "Datentypen anpassen",
-                  "detail": "Spalten auf korrekte Typen (Datum, Zeit, Zahl) umgestellt"
-                },
+                  "label": "Power Query · M",
+                  "caption": "Vier Roh-Uhrzeiten, <strong>eine</strong> Parse-Funktion statt vier Copy-Paste-Blöcke. Die zentrale ≥5-Minuten-Regel lebt nur in <strong>fl_delay_status</strong>; <strong>delayed</strong> und <strong>fl_delay_value</strong> leiten sich daraus ab. Keine doppelte Schwellenlogik, die auseinanderdriften kann.",
+                  "code": "// fnParseFlightTime — hhmm → time, einmal statt 4× kopiert\n(raw) => let\n    _n = Text.PadStart(Text.From(raw), 4, \"0\") & \"00\"\n  in try #time(Number.FromText(Text.Start(_n, 2)),\n               Number.FromText(Text.Middle(_n, 2, 2)), 0)\n     otherwise null\n\n// ≥5-Minuten-Regel — genau eine Quelle der Wahrheit\nfl_delay_status =\n  let d = if [fl_direction] = \"arrival\" then [delay_arr]\n                                        else [delay_dep]\n  in  if d >= 5 then [fl_direction] & \" delay\" else \"on time\"\n\ndelayed = [fl_delay_status] <> \"on time\"   // abgeleitet\n"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Datenmodell — Star Schema",
+          "subtitle": "Eine Faktentabelle, zwei Zeit-Dimensionen, Airline-Lookup und eine Measures-Tabelle",
+          "content": [
+            {
+              "type": "chart_refs",
+              "layout": "image_left",
+              "items": [
                 {
-                  "step": "2",
-                  "label": "Umbenennung",
-                  "detail": "Abfragen, angewendete Schritte und Spalten sprechend benannt"
-                },
-                {
-                  "step": "3",
-                  "label": "Sonderfall 2400 ersetzen",
-                  "detail": "Power BI kennt die Uhrzeit 2400 nicht — behandelt als 23:59"
-                },
-                {
-                  "step": "4",
-                  "label": "Uhrzeit-Formatierung",
-                  "detail": "hhmm-Format ohne führende Nullen in Zeitwerte umgewandelt (M)"
-                },
-                {
-                  "step": "5",
-                  "label": "Airline-Klarnamen",
-                  "detail": "Merge mit UNIQUE_CARRIERS.csv für vollständige Fluggesellschafts-Namen"
-                },
-                {
-                  "step": "6",
-                  "label": "Hilfsspalten",
-                  "detail": "fl_direction, fl_direction_delay_status neu ergänzt"
-                },
-                {
-                  "step": "7",
-                  "label": "Datumstabelle",
-                  "detail": "Für lückenlose zeitliche Darstellungen ergänzt"
+                  "label": "Power-BI-Datenmodell",
+                  "source": "fLAirport-tables.png",
+                  "caption": "Ein Star Schema: Die Trennung von Datum und Uhrzeit trägt die Zeitreihen."
                 }
               ]
             },
             {
-              "type": "statement",
-              "sentiment": "warning",
-              "text": "🔧 Platzhalter — vollständiger M-Code je Schritt folgt aus Power BI Desktop (Advanced Editor). Siehe BACKLOG.md #1."
+              "type": "sections",
+              "layout": "columns",
+              "items": [
+                {
+                  "label": "Aufbau",
+                  "points": [
+                    "Report_Flights_Data: Faktentabelle (1 Zeile = 1 Flug)",
+                    "_Calendar: Datumsebene (Jahr → Quartal → Monat → Woche → Tag)",
+                    "_Time: Tagesuhrzeit (Stunde) für die Tagesansicht",
+                    "Origin_Unique_Carrieres: Airline-Code → Klarname",
+                    "_Measures: eigene Tabelle für alle Kennzahlen"
+                  ]
+                }
+              ]
             }
           ]
         },
         {
           "title": "Datenanalyse — DAX Measures",
-          "subtitle": "Bekannte Kennzahlen, Formeln folgen",
+          "subtitle": "DIVIDE-sicher, Filterkontext bewusst genutzt",
           "content": [
             {
-              "type": "figures",
+              "type": "code",
+              "layout": "code_left",
               "items": [
                 {
-                  "value": "29,85 %",
-                  "label": "On-Time Performance (Measure)",
-                  "sentiment": "negative"
-                },
-                {
-                  "value": "18,54",
-                  "label": "Delay Index (Measure)",
-                  "sentiment": "warning"
-                },
-                {
-                  "value": "26,42 Min.",
-                  "label": "Ø Verspätung/Flug (Measure)",
-                  "sentiment": "warning"
-                },
-                {
-                  "value": "3,51 %",
-                  "label": "Top-3-Airline-Anteil (Measure + Filter)",
-                  "sentiment": "neutral"
+                  "label": "DAX · Measures",
+                  "caption": "Durchgehend <strong>DIVIDE</strong> (division-sicher). Der Durchschnitt teilt bewusst durch die <em>verspäteten</em> Flüge. Sonst zögen die 0-Werte der pünktlichen den Schnitt herunter. <strong>RANKX → SUMX → DIVIDE</strong> leitet die 3,51-%-Kernzahl her; dieselbe Rangdefinition färbt den Chart und rechnet die Zahl.",
+                  "code": "-- Ø-Verspätung: Summe / Anzahl der VERSPÄTETEN Flüge\navg_delay_value_total = DIVIDE([sum_delays_total], [cnt_total_delays])\n\notp_rate   = DIVIDE([cnt_total_ontimes], [cnt_total])   -- 29,85 %\ndelay_rate = DIVIDE([cnt_total_delays],  [cnt_total])   -- 70 %\ndelay_index = [delay_rate] * [avg_delay_value_total]    -- 18,54\n\n-- Kernzahl 3,51 %: eine Rangquelle für Farbe UND Anteil\ntop3_avg_delay_value_in_pct =\n  DIVIDE(\n    SUMX(FILTER(VALUES(op_carrier_name), [top3_avg_ranking] <= 3),\n         [cnt_total_delays]),\n    [cnt_total_delays])\n"
                 }
               ]
-            },
-            {
-              "type": "statement",
-              "sentiment": "warning",
-              "text": "🔧 Platzhalter — vollständige DAX-Formeln folgen, idealerweise per DAX Studio Export (alle Measures in einem Durchgang). Siehe BACKLOG.md #1."
             }
           ]
         }
@@ -216,6 +230,7 @@
     },
     {
       "nav_label": "Kennzahlen",
+      "nav_tick_label": "Kennzahlen",
       "slides": [
         {
           "title": "Kennzahlen im Überblick",
@@ -266,134 +281,119 @@
       ]
     },
     {
-      "nav_label": "Airlines",
+      "nav_label": "Analyse Verspätungen",
+      "nav_tick_label": "Analyse Verspätungen",
       "slides": [
         {
-          "title": "Ranking nach Ø-Verspätung",
+          "title": "Ø-Verspätung je Airline",
+          "subtitle": "13 Fluggesellschaften, Top-3-Anteil an der Gesamtverspätung",
           "content": [
             {
               "type": "chart_refs",
               "items": [
                 {
-                  "label": "Airline-Ranking nach Ø-Verspätung",
-                  "source": "page-07-left",
-                  "caption": "13 Fluggesellschaften sortiert nach Ø-Verspätung in Minuten. Top 3: Envoy Air, Frontier Airlines, JetBlue Airways."
+                  "label": "Airline-Ranking nach Ø-Verspätung + Top-3-Anteil",
+                  "source": "airline-delays.jpg",
+                  "width": "80%",
+                  "caption": "13 Fluggesellschaften sortiert nach Ø-Verspätung in Minuten. Top 3 (Envoy Air, Frontier Airlines, JetBlue Airways) = 31.092 von 886.882 Verspätungen = 3,51 %."
                 }
               ]
-            }
-          ]
-        },
-        {
-          "title": "Anteil der Top-3 an der Gesamtverspätung",
-          "content": [
-            {
-              "type": "chart_refs",
-              "items": [
-                {
-                  "label": "Anteil Top-3 an Gesamtverspätung",
-                  "source": "page-07-right",
-                  "caption": "31.092 von 886.882 Verspätungen = 3,51 % — die 'unpünktlichsten' Airlines sind kaum relevant für die Gesamtzahl."
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "title": "Erkenntnisse: Indikator verzerrt",
-          "subtitle": "Konsolidiert aus StoryView",
-          "content": [
-            {
-              "type": "sections",
-              "items": [
-                {
-                  "label": "Beobachtungen",
-                  "points": [
-                    "Top-3 nach Ø-Verspätung tragen nur 3,51 % zur Gesamtverspätung bei",
-                    "2016–2017 (ohne Envoy Air/US Airways): Einfluss deutlicher, Top-3-Anteil 22,31 %",
-                    "Getrennte Ankunfts-/Abflug-Betrachtung: Anteile variieren deutlich"
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "statement",
-              "sentiment": "warning",
-              "text": "Ø-Verspätung/Flug ignoriert die Flughäufigkeit — Airlines mit wenigen Flügen und Extremwerten verzerren den Indikator, ohne relevanten Einfluss auf die Gesamtzahl zu haben."
             }
           ]
         }
       ]
     },
     {
-      "nav_label": "Zeitliche Muster",
+      "nav_label": "Analyse Zeiträume",
+      "nav_tick_label": "Analyse Zeiträume",
       "slides": [
         {
-          "title": "Anzahl Verspätungen — aggregiert",
+          "title": "Aggregierte Betrachtung",
+          "subtitle": "Jahre, Quartale, Monate, Tage",
           "content": [
             {
               "type": "chart_refs",
               "items": [
                 {
-                  "label": "Anzahl Verspätungen, aggregiert",
-                  "source": "page-10-left",
-                  "caption": "Nach Jahr/Quartal/Monat/Tag, mit On-Time-Performance-Linie (~28–32 %)."
+                  "label": "Anzahl & Summe aller Verspätungen, aggregiert",
+                  "source": "time-year.jpg",
+                  "width": "100%",
+                  "caption": "Anzahl aller Verspätungen nach Monat (aggregiert über 2015–2017) mit On-Time-Performance-Linie, sowie Summe im Wochenverlauf."
                 }
               ]
             }
           ]
         },
         {
-          "title": "Wochenansicht — Anzahl mit OTP",
+          "title": "Wochenansicht der Verspätungen",
+          "subtitle": "Anzahl und Summe nach Wochentag, mit On-Time Performance",
           "content": [
             {
               "type": "chart_refs",
               "items": [
                 {
-                  "label": "Anzahl Verspätungen mit On-Time Performance",
-                  "source": "page-12-tr",
-                  "caption": "Mo–So, On-Time Performance ~29–31 %."
+                  "label": "Wochenansicht — Anzahl & Summe, mit On-Time Performance",
+                  "source": "time-week.jpg",
+                  "width": "100%",
+                  "caption": "Mo–So: Samstag mit der deutlich geringsten Anzahl und Summe an Verspätungen, Freitag/Sonntag/Montag am höchsten."
                 }
               ]
             }
           ]
         },
         {
-          "title": "Tagesansicht — Anzahl nach Uhrzeit",
+          "title": "Tagesansicht der Verspätungen",
+          "subtitle": "Verlauf nach Uhrzeit (0–23 Uhr)",
           "content": [
             {
               "type": "chart_refs",
               "items": [
                 {
-                  "label": "Anzahl Verspätungen, Tagesansicht",
-                  "source": "page-13-top",
-                  "caption": "Stundenverlauf 0–23 Uhr, Peaks 6–9 Uhr und später Nachmittag."
+                  "label": "Tagesansicht — Anzahl & Summe nach Uhrzeit",
+                  "source": "time-day.jpg",
+                  "width": "100%",
+                  "caption": "Deutliche Spitzen am Morgen (6–9 Uhr) und am späten Nachmittag, mit starken OTP-Schwankungen im Tagesverlauf."
                 }
               ]
             }
           ]
-        },
+        }
+      ]
+    },
+    {
+      "nav_label": "Insights",
+      "nav_tick_label": "Insights",
+      "slides": [
         {
           "title": "Erkenntnisse Zeitebenen",
+          "subtitle": "Erkenntnisse aus den langfristigen und kurzfristigen Mustern im Überblick",
           "content": [
             {
-              "type": "sections",
+              "type": "box_grid",
+              "heading": "Beobachtungen",
               "items": [
                 {
-                  "label": "Langfristig — Jahre, Quartale, Monate",
-                  "points": [
-                    "Über die Jahre insgesamt steigende Verspätungen",
-                    "Saisonale Muster: Anstieg in Q2, Spitzenwerte in Q3, niedrigster Wert in Q1",
-                    "Feiertage und Urlaubszeiten lassen sich deutlich ablesen"
-                  ]
+                  "text": "<strong>Langfristige Zeitebene</strong><br>Betrachtung Jahre, Quartale und Monate<ul><li>Über die Jahre insgesamt steigende Verspätungen</li><li>Saisonale Muster: Anstieg in Q2, Spitzenwerte in Q3, niedrigster Wert in Q1</li><li>Feiertage und Urlaubszeiten lassen sich deutlich ablesen</li></ul>"
                 },
                 {
-                  "label": "Kurzfristig — Wochentage, Tagesstunden",
-                  "points": [
-                    "Tagesansicht zeigt starke OTP-Schwankungen — Unbeständigkeit im operativen Ablauf",
-                    "Samstag: deutlich geringste Anzahl und Summe an Verspätungen",
-                    "Freitag, Sonntag und Montag: Werte steigen wieder deutlich an",
-                    "Peaks am Morgen (6–7 und 8–9 Uhr) und am späten Nachmittag"
-                  ]
+                  "text": "<strong>Kurzfristige Zeitebene</strong><br>Betrachtung Wochen, Tage und Stunden<ul><li>Tagesansicht zeigt starke OTP-Schwankungen</li><li>Samstags geringere Anzahl & Summe an Verspätungen</li><li>Fr., So. und Mo.: Werte steigen wieder deutlich an</li><li>Rushhour Peaks deutlich von 6–7 und 8–9 Uhr</li></ul>"
+                }
+              ]
+            },
+            {
+              "type": "box_grid",
+              "items": [
+                {
+                  "text": "Mehrere deutliche <strong>wiederkehrende Muster</strong> erkennbar, vor allem saisonal in Quartalen und Monaten.",
+                  "highlight": true
+                },
+                {
+                  "text": "Häufungen durch typischen <strong>Arbeitszeit-Rhythmus</strong> lassen sich auf Wochen- und Tagesebene deutlich erkennen.",
+                  "highlight": true
+                },
+                {
+                  "text": "<strong>Einzelne Auffälligkeiten</strong> erwecken Aufmerksamkeit, etwa Spitzen in der kontinuierlichen Betrachtung.",
+                  "highlight": true
                 }
               ]
             }

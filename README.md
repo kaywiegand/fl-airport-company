@@ -30,7 +30,7 @@
 | Neu im Projekt / schneller Überblick | [Hub](public/index.html) — Kennzahlen + Navigation zu allen Ansichten |
 | Auf der Suche nach der Business-Story | [Overview](public/overview.html) — verdichtete Kennzahlen & Empfehlungen |
 | Willst den vollständigen Report | [StoryView](public/storyview.html) — 1:1 zum Original-Report, inkl. Anhang |
-| Technisch interessiert (SQL/DAX/M) | [TechView](public/techview.html) — Deep-Dive, SQL/DAX-Formeln folgen |
+| Technisch interessiert (SQL/DAX/M) | [TechView](public/techview.html) · Code-Doku: [`report/measures-dax.md`](report/measures-dax.md) · [`report/etl-m-code.md`](report/etl-m-code.md) |
 | Willst den Original-Report | [`report/Report-flAirport_v09.pdf`](report/Report-flAirport_v09.pdf) |
 
 ---
@@ -90,11 +90,11 @@ gestrichene und umgeleitete Flüge sind ausgeschlossen.
 
 | Property | Value |
 | :--- | :--- |
-| Quelle | PostgreSQL-Datenbank `Flight_Data`, Tabelle `flights` (StackFuel-Trainingsumgebung, Zugang nicht öffentlich) + [`data/UNIQUE_CARRIERS.csv`](data/UNIQUE_CARRIERS.csv) |
+| Quelle | PostgreSQL-Datenbank `Flight_Data`, Tabelle `flights` (StackFuel-Trainingsumgebung, Zugang nicht öffentlich) + [`data/raw/UNIQUE_CARRIERS.csv`](data/raw/UNIQUE_CARRIERS.csv) · Herkunft & Datenwörterbuch: [`data/raw/data-source.md`](data/raw/data-source.md) |
 | Umfang | 1.264.229 Flüge (nach Filterung) · 13 Fluggesellschaften |
 | Zeitraum | 2015–2017 |
 | Granularität | pro Flug |
-| Known Issues | Uhrzeiten im Format `hhmm` ohne führende Nullen, Sonderwert `2400` (behandelt als 23:59); bei Ankünften zählt nur Ankunfts-, bei Abflügen nur Abflugunpünktlichkeit |
+| Known Issues | Uhrzeiten im Format `hhmm` ohne führende Nullen, Sonderwert `2400` für Mitternacht (betrifft nur die Anzeige-Uhrzeiten, nicht die Verspätungswerte — siehe [`report/etl-m-code.md`](report/etl-m-code.md)); bei Ankünften zählt nur Ankunfts-, bei Abflügen nur Abflugunpünktlichkeit |
 
 ---
 
@@ -104,15 +104,18 @@ Kein Notebook-/Code-Workflow — die komplette Analyse liegt im Power-BI-Report:
 
 - **Report:** [`report/Report-flAirport_v09.pbix`](report/Report-flAirport_v09.pbix) (Power BI
   Desktop) · [`report/Report-flAirport_v09.pdf`](report/Report-flAirport_v09.pdf) (Export, 21
-  Seiten) · [`report/report_extract_final.md`](report/report_extract_final.md) (Text-Extrakt)
+  Seiten) · [`docs/report-extract.md`](docs/report-extract.md) (Text-Extrakt)
+- **Code-Doku:** [`report/measures-dax.md`](report/measures-dax.md) (DAX-Measures) ·
+  [`report/etl-m-code.md`](report/etl-m-code.md) (SQL Native Query + Power Query) ·
+  [`data/raw/data-source.md`](data/raw/data-source.md) (Datenherkunft)
 - **Kennzahlen-Übersicht:** Gesamtflüge, Pünktlichkeitsanteil, OTP, Delay Index
 - **Airline-Ranking:** Top 3 nach Ø-Verspätung pro Flug + deren Anteil an allen Verspätungen
 - **Zeitliche Analyse:** Jahr, Quartal, Monat, Kalenderwoche, Wochentag, Tagesstunde — jeweils
   nach Anzahl *und* Summe der Verspätungen
 
-Exakter SQL-Quelltext, Power-Query-M-Code und DAX-Measure-Formeln sind noch nicht extrahiert
-(Power BI Desktop läuft nicht auf macOS) — siehe [TechView](public/techview.html) für den
-aktuellen Stand und `BACKLOG.md` #1.
+SQL Native Query, Power-Query-M-Code und DAX-Measures sind extrahiert und dokumentiert (siehe
+**Code-Doku** oben). Offen bleiben nur das Rohdatenvolumen vor Filterung und die exakte
+`_Calendar`-Beziehung — siehe `BACKLOG.md` #1.
 
 ---
 
@@ -134,7 +137,7 @@ aktuellen Stand und `BACKLOG.md` #1.
 - **Indikator verbessern** — Ø-Verspätung/Flug allein ist kein verlässlicher Priorisierungs-
   Indikator; Kombination aus OTP, Anzahl und Summe der Verspätungen (Delay Index) sinnvoller
 
-Details: [`report/report_extract_final.md`](report/report_extract_final.md)
+Details: [`docs/report-extract.md`](docs/report-extract.md)
 
 ---
 
@@ -143,9 +146,9 @@ Details: [`report/report_extract_final.md`](report/report_extract_final.md)
 | Artefakt | Beschreibung |
 | :--- | :--- |
 | [Hub](public/index.html) | Landing Page + Navigation zu allen Ansichten |
-| [Overview](public/overview.html) | Verdichtete Business-Sicht — Kennzahlen & Empfehlungen (11 Slides) |
-| [StoryView](public/storyview.html) | Vollständiger Report 1:1 zum PDF, inkl. Anhang (29 Slides) |
-| [TechView](public/techview.html) | Technischer Deep-Dive — SQL/M/DAX (Platzhalter, siehe BACKLOG #1) |
+| [Overview](public/overview.html) | Verdichtete Business-Sicht — Kennzahlen & Empfehlungen (12 Slides) |
+| [StoryView](public/storyview.html) | Vollständiger Report 1:1 zum PDF, inkl. Ergänzungen (25 Slides) |
+| [TechView](public/techview.html) | Technischer Deep-Dive — SQL Native Query · Power Query (M) · Datenmodell · DAX (15 Slides) |
 | [Original-PDF](report/Report-flAirport_v09.pdf) | Der ursprüngliche Power-BI-Export |
 
 Alle drei HTML-Ansichten werden aus einer einzigen Quelle generiert (`public/md/slides.yaml`) —
@@ -176,7 +179,7 @@ Kein Python-Setup nötig, um den Report zu öffnen — dafür [Power BI Desktop]
 open report/Report-flAirport_v09.pbix
 ```
 
-PDF-Export und Text-Extrakt liegen zusätzlich unter `report/` für den schnellen Überblick ohne
+PDF-Export liegt unter `report/`, der Text-Extrakt unter `docs/`, für den schnellen Überblick ohne
 Power BI Installation. Die HTML-Ansichten unter `public/` sind statisch und lokal im Browser
 öffenbar, kein Server nötig.
 
