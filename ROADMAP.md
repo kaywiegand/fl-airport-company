@@ -23,10 +23,12 @@ Bisher nur Rohmaterial ohne eigenes Repo, ohne Fundament, ohne öffentliche Aufb
       3 Views (Overview/StoryView/TechView), TechView mit SQL/M/DAX-Platzhaltern (BACKLOG #1)
 - [x] Phase 5 — Report: `public/index.html` + Views mechanisch generiert (`make portfolio`),
       im Browser verifiziert (Hub, StoryView-Chart, TechView-Platzhalter)
-- [ ] Phase 6 — Public Launch: Commit + Push nach GitHub, `docs/PROJECTS.md`-Status auf
-      `✅ portfolio-ready`
-- [ ] Phase 7 — TechView-Anreicherung: SQL/M-Code/DAX aus Power BI Desktop nachziehen
-      (BACKLOG #1, sobald Windows-Zugang verfügbar)
+- [x] Phase 6 — Public Launch: Commit + Push nach GitHub, GitHub Pages eingerichtet
+      (`.github/workflows/pages.yml`), `docs/PROJECTS.md`-Status auf `✅ portfolio-ready`
+- [x] Phase 7 — TechView-Anreicherung: SQL Native Query, Power-Query-M-Code, Datenmodell und
+      DAX-Measures vollständig dokumentiert und als eigenes TechView-Kapitel umgesetzt (4
+      Code-/Modell-Slides + Intro + Closing). Einzig offen: Rohdatenvolumen vor Filterung
+      (BACKLOG #1) — nicht aus dem `.pbix` ableitbar, nur aus der Trainings-DB selbst
 
 ---
 

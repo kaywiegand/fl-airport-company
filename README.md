@@ -3,7 +3,7 @@
 **Unpünktlichkeit am Los Angeles International Airport (LAX), 2015–2017 — 1.264.229 Flüge, 13 Fluggesellschaften, aufbereitet für Führungskräfte-Reporting.**
 
 ![Type](https://img.shields.io/badge/Type-Power%20BI%20Business%20Intelligence-blue)
-![Status](https://img.shields.io/badge/Status-in%20Aufbereitung-yellow)
+![Status](https://img.shields.io/badge/Status-Phase%207%20complete-brightgreen)
 
 ---
 
@@ -112,8 +112,8 @@ Kein Notebook-/Code-Workflow — die komplette Analyse liegt im Power-BI-Report:
 
 SQL Native Query, Power-Query-M-Code, DAX-Measures und das Datenmodell (Star Schema) sind
 extrahiert und dokumentiert (siehe **Code-Doku** oben). Offen bleibt nur das Rohdatenvolumen vor
-Filterung (aktuell nur der gefilterte Endstand von 1.264.229 Flügen bekannt) — siehe
-`BACKLOG.md` #1.
+Filterung (aktuell nur der gefilterte Endstand von 1.264.229 Flügen bekannt) — nur aus der
+Trainingsdatenbank selbst zu ermitteln.
 
 ---
 

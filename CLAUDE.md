@@ -12,7 +12,7 @@
 | Slug | `fl-airport-company` |
 | Typ | DA / BI-Export (Power BI) |
 | Stack | Power BI · SQL (PostgreSQL) |
-| Status | 🔄 in Aufbereitung |
+| Status | ✅ portfolio-ready |
 
 ---
 
