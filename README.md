@@ -18,9 +18,6 @@
 - Klare saisonale (Q2-Anstieg, Q3-Peak) und wöchentliche Muster (Samstag = Minimum, Freitag/
   Montag = Anstieg) sowie Tagesmuster (Peaks morgens 6–9 Uhr und am späten Nachmittag)
 
-![Anteil der Top-3-Airlines an der Gesamtverspätung](public/img/page-07-right.png)
-*Die drei Airlines mit der schlechtesten Durchschnittsverspätung tragen nur 3,51 % zur Gesamtverspätung bei — der naheliegende Indikator täuscht.*
-
 ---
 
 ## Where to start
@@ -113,9 +110,10 @@ Kein Notebook-/Code-Workflow — die komplette Analyse liegt im Power-BI-Report:
 - **Zeitliche Analyse:** Jahr, Quartal, Monat, Kalenderwoche, Wochentag, Tagesstunde — jeweils
   nach Anzahl *und* Summe der Verspätungen
 
-SQL Native Query, Power-Query-M-Code und DAX-Measures sind extrahiert und dokumentiert (siehe
-**Code-Doku** oben). Offen bleiben nur das Rohdatenvolumen vor Filterung und die exakte
-`_Calendar`-Beziehung — siehe `BACKLOG.md` #1.
+SQL Native Query, Power-Query-M-Code, DAX-Measures und das Datenmodell (Star Schema) sind
+extrahiert und dokumentiert (siehe **Code-Doku** oben). Offen bleibt nur das Rohdatenvolumen vor
+Filterung (aktuell nur der gefilterte Endstand von 1.264.229 Flügen bekannt) — siehe
+`BACKLOG.md` #1.
 
 ---
 
@@ -147,8 +145,8 @@ Details: [`docs/report-extract.md`](docs/report-extract.md)
 | :--- | :--- |
 | [Hub](public/index.html) | Landing Page + Navigation zu allen Ansichten |
 | [Overview](public/overview.html) | Verdichtete Business-Sicht — Kennzahlen & Empfehlungen (12 Slides) |
-| [StoryView](public/storyview.html) | Vollständiger Report 1:1 zum PDF, inkl. Ergänzungen (25 Slides) |
-| [TechView](public/techview.html) | Technischer Deep-Dive — SQL Native Query · Power Query (M) · Datenmodell · DAX (15 Slides) |
+| [StoryView](public/storyview.html) | Vollständiger Report 1:1 zum PDF, inkl. Ergänzungen (24 Slides) |
+| [TechView](public/techview.html) | Technischer Deep-Dive — SQL Native Query · Power Query (M) · Datenmodell · DAX (12 Slides) |
 | [Original-PDF](report/Report-flAirport_v09.pdf) | Der ursprüngliche Power-BI-Export |
 
 Alle drei HTML-Ansichten werden aus einer einzigen Quelle generiert (`public/md/slides.yaml`) —
