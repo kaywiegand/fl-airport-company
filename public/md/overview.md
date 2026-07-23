@@ -25,6 +25,14 @@
 * **29,85 %** — On-Time Performance
 * **26,42 Min.** — Ø Verspätung pro Flug
 
+## Inhaltsübersicht
+*Die verdichtete Business-Sicht: Kennzahlen, Erkenntnisse und Empfehlungen*
+
+1. Einstieg
+2. Kennzahlen
+3. Insights
+4. Empfehlungen
+
 
 ---
 
@@ -49,14 +57,12 @@
 
 
 ## Kennzahlen im Überblick
-*Betroffene Airlines, Steigerung, On-Time Performance, Delay Index und Ø-Verspätung*
+*Konsolidierte Sicht, Detail-Charts siehe StoryView*
 
-* **13** — Betroffene Fluggesellschaften
-* **29,85 %** — On-Time Performance
-* **18,54** — Delay Index
-* **+7,17 %** — Steigerung Verspätungen (22.135)
-* **809** — Ø Verspätungen pro Tag
-* **26,42 Min.** — Ø Verspätung pro Flug
+* **1.264.229** — Flüge 2015–2017
+* **368.669** — Abflug-Verspätungen
+* **518.213** — Ankunfts-Verspätungen
+* **13** — betroffene Fluggesellschaften
 
 
 ---

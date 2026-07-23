@@ -38,7 +38,7 @@ chapters:
               - {value: "26,42 Min.", label: "Ø Verspätung pro Flug", sentiment: warning}
 
       - id: projektrahmen-agenda
-        views: [storyview, techview]
+        views: [storyview]
         kicker: "Agenda"
         layout: L6
         title: "Inhaltsübersicht"
@@ -54,6 +54,34 @@ chapters:
               - "Insights"
               - "Empfehlungen"
               - "Ergänzungen"
+
+      - id: projektrahmen-agenda-techview
+        views: [techview]
+        kicker: "Agenda"
+        layout: L6
+        title: "Inhaltsübersicht"
+        subtitle: "Der technische Weg von der Datenerhebung bis zur fertigen Kennzahl"
+        content:
+          - type: agenda
+            items:
+              - "Einstieg"
+              - "Technischer Ansatz"
+              - "Kennzahlen"
+              - "Analyse Verspätungen"
+
+      - id: projektrahmen-agenda-overview
+        views: [overview]
+        kicker: "Agenda"
+        layout: L6
+        title: "Inhaltsübersicht"
+        subtitle: "Die verdichtete Business-Sicht: Kennzahlen, Erkenntnisse und Empfehlungen"
+        content:
+          - type: agenda
+            items:
+              - "Einstieg"
+              - "Kennzahlen"
+              - "Insights"
+              - "Empfehlungen"
 
   # ---------------------------------------------------------------------
   - id: einstieg
@@ -101,6 +129,22 @@ chapters:
   - id: technical-approach
     nav_label: Technischer Ansatz
     slides:
+      - id: tech-intro
+        views: [techview]
+        title: "Technischer Ansatz"
+        subtitle: "Vier technische Arbeitsschritte bis zur vollständigen Analyse"
+        content:
+          - type: h_timeline
+            items:
+              - label: "Datenerhebung"
+                text: "SQL Native Query — Gefiltert an der Quelle, nicht clientseitig nachgezogen"
+              - label: "Datenbereinigung"
+                text: "Power Query (M) — Zeit-Parsing als Funktion, die ≥5-Minuten-Regel an genau einer Stelle"
+              - label: "Datenmodell"
+                text: "Star Schema — Eine Faktentabelle, zwei Zeit-Dimensionen, Airline-Lookup und eine Measures-Tabelle"
+              - label: "Datenanalyse"
+                text: "DAX Measures — DIVIDE-sicher, Filterkontext bewusst genutzt"
+
       - id: tech-sql
         views: [techview]
         title: "Datenerhebung — SQL Native Query"
@@ -110,7 +154,14 @@ chapters:
             layout: code_left
             items:
               - label: "PostgreSQL · Native Query (EnableFolding)"
-                caption: "Query Folding delegiert die Filterung an PostgreSQL. Zeitraum, LAX-only und der Ausschluss gestrichener/umgeleiteter Flüge grenzen den Datensatz direkt an der Quelle ab. <strong>ABS()</strong> macht Verspätungen vorzeichenlos, sie zählen zu früh und zu spät gleichermaßen. <strong>fl_direction</strong> entsteht per CASE."
+                bullets:
+                  - "Query Folding delegiert alle Filterungen und Berechnungen direkt an PostgreSQL."
+                  - "Filterung an Quelle grenzt Zeitraum, LAX-Bezug und reguläre Flüge direkt beim Laden ein."
+                  - "<code>EXTRACT(WEEK...)</code> berechnet die Kalenderwoche performant auf dem Datenbankserver."
+                  - "<code>fl_direction</code> entsteht per <code>CASE</code> zur Unterscheidung von Ankunft und Abflug."
+                  - "Rohdaten-Zeitstempel werden für spätere Typkonvertierungen in Power Query unverändert durchgereicht."
+                  - "<code>ABS()</code> macht Verspätungen vorzeichenlos, wodurch Verfrühung und Verspätung gleichermaßen zählen."
+                  - "<code>op_carrier</code> dient als Schlüssel für den späteren Tabellen-Join in Power Query."
                 code: |
                   SELECT fl_date, EXTRACT(WEEK FROM fl_date) AS fl_week,
                          CASE WHEN dest   = 'LAX' THEN 'arrival'
@@ -134,7 +185,10 @@ chapters:
             layout: code_left
             items:
               - label: "Power Query · M"
-                caption: "Vier Roh-Uhrzeiten, <strong>eine</strong> Parse-Funktion statt vier Copy-Paste-Blöcke. Die zentrale ≥5-Minuten-Regel lebt nur in <strong>fl_delay_status</strong>; <strong>delayed</strong> und <strong>fl_delay_value</strong> leiten sich daraus ab. Keine doppelte Schwellenlogik, die auseinanderdriften kann."
+                bullets:
+                  - "Zentrale Parse-Funktion verarbeitet vier Roh-Uhrzeiten effizient in einem Schritt statt über doppelte Copy-Paste-Blöcke."
+                  - "Einheitliche Schwellenlogik steuert die 5-Minuten-Regel zentral in <code>fl_delay_status</code>, damit Definitionen nicht auseinanderdriften."
+                  - "Abgeleitete Felder wie <code>delayed</code> nutzen die Ergebnisse von <code>fl_delay_status</code>, statt die Logik neu zu berechnen."
                 code: |
                   // fnParseFlightTime — hhmm → time, einmal statt 4× kopiert
                   (raw) => let
@@ -162,16 +216,12 @@ chapters:
               - label: "Power-BI-Datenmodell"
                 source: "fLAirport-tables.png"
                 caption: "Ein Star Schema: Die Trennung von Datum und Uhrzeit trägt die Zeitreihen."
-          - type: sections
-            layout: columns
-            items:
-              - label: "Aufbau"
-                points:
-                  - "Report_Flights_Data: Faktentabelle (1 Zeile = 1 Flug)"
-                  - "_Calendar: Datumsebene (Jahr → Quartal → Monat → Woche → Tag)"
-                  - "_Time: Tagesuhrzeit (Stunde) für die Tagesansicht"
-                  - "Origin_Unique_Carrieres: Airline-Code → Klarname"
-                  - "_Measures: eigene Tabelle für alle Kennzahlen"
+                bullets:
+                  - "<code>Report_Flights_Data</code>: Faktentabelle (1 Zeile = 1 Flug)"
+                  - "<code>_Calendar</code>: Datumsebene (Jahr → Quartal → Monat → Woche → Tag)"
+                  - "<code>_Time</code>: Tagesuhrzeit (Stunde) für die Tagesansicht"
+                  - "<code>Origin_Unique_Carrieres</code>: Airline-Code → Klarname"
+                  - "<code>_Measures</code>: eigene Tabelle für alle Kennzahlen"
 
       - id: tech-dax
         views: [techview]
@@ -182,7 +232,11 @@ chapters:
             layout: code_left
             items:
               - label: "DAX · Measures"
-                caption: "Durchgehend <strong>DIVIDE</strong> (division-sicher). Der Durchschnitt teilt bewusst durch die <em>verspäteten</em> Flüge. Sonst zögen die 0-Werte der pünktlichen den Schnitt herunter. <strong>RANKX → SUMX → DIVIDE</strong> leitet die 3,51-%-Kernzahl her; dieselbe Rangdefinition färbt den Chart und rechnet die Zahl."
+                bullets:
+                  - "Durchgehend <code>DIVIDE</code> garantiert eine fehlerfreie Division und fängt Berechnungsfehler durch Nullwerte automatisch ab."
+                  - "Spezifischer Durchschnitt teilt bewusst nur durch verspätete Flüge, damit Pünktliche den Schnitt nicht senken."
+                  - "Kombinierte Rang-Logik nutzt <code>RANKX</code> über <code>SUMX</code> zu <code>DIVIDE</code> für die exakte Berechnung der 3,51-%-Kernzahl."
+                  - "Einheitliche Formatierung steuert über dieselbe Rangdefinition sowohl die Chart-Farbe als auch den finalen Prozentanteil."
                 code: |
                   -- Ø-Verspätung: Summe / Anzahl der VERSPÄTETEN Flüge
                   avg_delay_value_total = DIVIDE([sum_delays_total], [cnt_total_delays])
@@ -229,16 +283,20 @@ chapters:
       - id: kennzahlen-overview-facts
         views: [overview]
         title: "Kennzahlen im Überblick"
-        subtitle: "Betroffene Airlines, Steigerung, On-Time Performance, Delay Index und Ø-Verspätung"
+        subtitle: "Konsolidierte Sicht, Detail-Charts siehe StoryView"
         content:
           - type: figures
             items:
-              - {value: "13", label: "Betroffene Fluggesellschaften", sentiment: neutral}
-              - {value: "29,85 %", label: "On-Time Performance", sentiment: negative}
-              - {value: "18,54", label: "Delay Index", sentiment: warning}
-              - {value: "+7,17 %", label: "Steigerung Verspätungen (22.135)", sentiment: warning}
-              - {value: "809", label: "Ø Verspätungen pro Tag", sentiment: neutral}
-              - {value: "26,42 Min.", label: "Ø Verspätung pro Flug", sentiment: warning}
+              - {value: "1.264.229", label: "Flüge 2015–2017", sentiment: neutral}
+              - {value: "368.669", label: "Abflug-Verspätungen", sentiment: neutral}
+              - {value: "518.213", label: "Ankunfts-Verspätungen", sentiment: neutral}
+              - {value: "13", label: "betroffene Fluggesellschaften", sentiment: neutral}
+          - type: ring_value
+            items:
+              - {kind: ring, value: "70 %", percent: 70, label: "Unpünktlichkeit (≥ 5 Min.)"}
+              - {kind: ring, value: "29,85 %", percent: 29.85, label: "On-Time Performance"}
+              - {value: "18,54", label: "Delay Index"}
+              - {value: "26,42 Min.", label: "Ø Verspätung pro Flug"}
 
       - id: kennzahlen-airlines-otp
         views: [storyview]
@@ -267,24 +325,29 @@ chapters:
       - id: kennzahlen-tech-merged
         views: [techview]
         title: "Kennzahlen im Überblick"
-        subtitle: "Konsolidierte Sicht — Detail-Charts siehe StoryView"
+        subtitle: "Konsolidierte Sicht, Detail-Charts siehe StoryView"
         content:
           - type: figures
             items:
               - {value: "1.264.229", label: "Flüge 2015–2017", sentiment: neutral}
-              - {value: "70 %", label: "unpünktlich (≥ 5 Min.)", sentiment: negative}
-              - {value: "368.669 / 518.213", label: "Abflug- / Ankunftsverspätungen", sentiment: neutral}
+              - {value: "368.669", label: "Abflug-Verspätungen", sentiment: neutral}
+              - {value: "518.213", label: "Ankunfts-Verspätungen", sentiment: neutral}
               - {value: "13", label: "betroffene Fluggesellschaften", sentiment: neutral}
-              - {value: "29,85 %", label: "On-Time Performance", sentiment: negative}
-              - {value: "18,54", label: "Delay Index", sentiment: warning}
-              - {value: "26,42 Min.", label: "Ø Verspätung pro Flug", sentiment: warning}
+          - type: ring_value
+            items:
+              - {kind: ring, value: "70 %", percent: 70, label: "Unpünktlichkeit (≥ 5 Min.)"}
+              - {kind: ring, value: "29,85 %", percent: 29.85, label: "On-Time Performance"}
+              - {value: "18,54", label: "Delay Index"}
+              - {value: "26,42 Min.", label: "Ø Verspätung pro Flug"}
+          - type: note
+            text: "Alle acht Werte sind berechnete DAX-Measures auf der Faktentabelle, keine roh übernommenen Spaltenwerte: von einfachen Zählern (<code>cnt_total</code>, <code>cnt_op_carrier</code>) bis zu abgeleiteten Quoten (<code>otp_rate</code>, <code>delay_index</code>)."
 
   # ---------------------------------------------------------------------
   - id: analyse-verspaetungen
     nav_label: Analyse Verspätungen
     slides:
       - id: verspaetungen-airline-delays
-        views: [storyview, techview]
+        views: [storyview]
         title: "Ø-Verspätung je Airline"
         subtitle: "13 Fluggesellschaften, Top-3-Anteil an der Gesamtverspätung"
         content:
@@ -294,6 +357,19 @@ chapters:
                 source: "airline-delays.jpg"
                 width: "80%"
                 caption: "13 Fluggesellschaften sortiert nach Ø-Verspätung in Minuten. Top 3 (Envoy Air, Frontier Airlines, JetBlue Airways) = 31.092 von 886.882 Verspätungen = 3,51 %."
+
+      - id: verspaetungen-airline-delays-techview
+        views: [techview]
+        title: "Ø-Verspätung je Airline"
+        subtitle: "13 Fluggesellschaften, Top-3-Anteil an der Gesamtverspätung"
+        content:
+          - type: chart_refs
+            items:
+              - label: "Airline-Ranking nach Ø-Verspätung + Top-3-Anteil"
+                source: "airline-delays.jpg"
+                width: "80%"
+          - type: note
+            text: "Measure <code>avg_delay_value_total</code> für die Anzeige des Diagramms und vier weitere <code>top3_avg_*</code>-Measures für die Top-3-Anzeige und -Darstellung."
 
   - id: insights-verspaetungen
     nav_label: Insights
@@ -334,7 +410,7 @@ chapters:
     nav_label: Analyse Zeiträume
     slides:
       - id: zeitraeume-year
-        views: [storyview, techview]
+        views: [storyview]
         title: "Aggregierte Betrachtung"
         subtitle: "Jahre, Quartale, Monate, Tage"
         content:
@@ -358,7 +434,7 @@ chapters:
                 caption: "Anzahl aller Verspätungen 2015–2017 im Monatsverlauf, sowie Summe im Tagesdetail Januar/Februar 2015."
 
       - id: zeitraeume-week
-        views: [storyview, techview]
+        views: [storyview]
         title: "Wochenansicht der Verspätungen"
         subtitle: "Anzahl und Summe nach Wochentag, mit On-Time Performance"
         content:
@@ -370,7 +446,7 @@ chapters:
                 caption: "Mo–So: Samstag mit der deutlich geringsten Anzahl und Summe an Verspätungen, Freitag/Sonntag/Montag am höchsten."
 
       - id: zeitraeume-day
-        views: [storyview, techview]
+        views: [storyview]
         title: "Tagesansicht der Verspätungen"
         subtitle: "Verlauf nach Uhrzeit (0–23 Uhr)"
         content:
@@ -383,9 +459,14 @@ chapters:
 
   - id: insights-zeitraeume
     nav_label: Insights
+    # Overview stellt diese direkt hinter das andere Insights-Kapitel (keine Analyse-Zeiträume-
+    # Slides dazwischen wie in StoryView) — zweiter "Insights"-Nav-Tick wäre da redundant
+    # (Kay-Feedback 2026-07-23). Leerer Tick-Label unterdrückt den eigenen Tick nur für Overview,
+    # die Slide bleibt inhaltlich Teil des vorherigen "Insights"-Abschnitts.
+    nav_tick_by_view: {overview: ""}
     slides:
       - id: insights-zeitraeume-erkenntnisse
-        views: [storyview, overview, techview]
+        views: [storyview, overview]
         title: "Erkenntnisse Zeitebenen"
         subtitle: "Erkenntnisse aus den langfristigen und kurzfristigen Mustern im Überblick"
         content:
@@ -533,11 +614,27 @@ chapters:
         closing_extra_links:
           - {label: "LinkedIn-Profil", href: "https://www.linkedin.com/in/kaywiegand/"}
 
+      - id: closing-danke-techview
+        views: [techview]
+        role: closing
+        title_from_hub: true
+        layout: split
+        content:
+          - type: statement
+            layout: lead_copy
+            text: "Vom Rohdatenimport bis zur Kennzahl"
+            copy:
+              - "SQL, Power Query (M), Datenmodell und DAX greifen bewusst ineinander: Jede Filterung, jede Bereinigungsregel und jede Kennzahl ist an genau einer Stelle definiert, nicht mehrfach kopiert."
+              - "Dieser Aufbau macht die Analyse reproduzierbar und flexibel: Neue Zeiträume oder zusätzliche Airlines lassen sich ergänzen, ohne die bestehende Logik anzufassen."
+        closing_primary_link: {label: "Vollständiger Report (PDF)", href: "report/Report-flAirport_v09.pdf"}
+        closing_extra_links:
+          - {label: "LinkedIn-Profil", href: "https://www.linkedin.com/in/kaywiegand/"}
+
 # ---------------------------------------------------------------------
 view_composition:
   overview:  [projektrahmen, einstieg, kennzahlen, insights-verspaetungen, insights-zeitraeume, empfehlungen, closing]
   storyview: [projektrahmen, einstieg, kennzahlen, analyse-verspaetungen, insights-verspaetungen, analyse-zeitraeume, insights-zeitraeume, empfehlungen, ergaenzungen, closing]
-  techview:  [projektrahmen, einstieg, technical-approach, kennzahlen, analyse-verspaetungen, analyse-zeitraeume, insights-zeitraeume]
+  techview:  [projektrahmen, einstieg, technical-approach, kennzahlen, analyse-verspaetungen, closing]
 
 view_meta:
   overview:
@@ -581,7 +678,7 @@ hub:
       text: "SQL (PostgreSQL) → Power Query (M) → DAX Measures → Power BI Report → Management-Präsentation."
   quick_links:
     - {href: "report/Report-flAirport_v09.pdf", label: "Original-Report (PDF)"}
-  view_order: [overview, storyview, techview]
+  view_order: [overview, techview, storyview]
   view_cards:
     overview:
       kicker: "Overview"
@@ -589,15 +686,15 @@ hub:
       description: "Verdichtete Business-Sicht: Kernzahlen, wichtigste Erkenntnisse und Handlungsempfehlungen."
       badge: "HR · Business"
       badge_class: blue
+    techview:
+      kicker: "TechView"
+      label: "Technischer Deep-Dive"
+      description: "SQL, Power Query und DAX-Measures plus die analytischen Kern-Charts."
+      badge: "Tech Lead"
+      badge_class: purple
     storyview:
       kicker: "StoryView"
       label: "Vollständiger Report"
       description: "Der komplette Power-BI-Report inkl. Ergänzungen — alle Kennzahlen, Airline-Details und Zeitmuster."
       badge: "Data Peers · Community"
       badge_class: green
-    techview:
-      kicker: "TechView"
-      label: "Technischer Deep-Dive"
-      description: "SQL, Power Query und DAX-Measures (in Aufbau) plus die analytischen Kern-Charts."
-      badge: "Tech Lead"
-      badge_class: purple

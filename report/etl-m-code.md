@@ -139,14 +139,14 @@ Star Schema mit einer Faktentabelle, drei Dimensionen und einer eigenen Measures
 | Tabelle | Rolle | Beziehung |
 | :--- | :--- | :--- |
 | `Report_Flights_Data` | Faktentabelle (1 Zeile = 1 Flug) | — |
-| `Origin_Unique_Carrieres` | Airline-Lookup (Code → Klarname) | `[op_carrier_code]` → `[Code]` (n:1) |
-| `_Calendar` | Datumsdimension (Jahr → Tag) | `[Date]` → `[fl_date]` (1:n) |
-| `_Time` | Uhrzeit-Dimension (Stunde/Minute) | über `time_crs_union` → `[Time]` (n:1) |
+| `Origin_Unique_Carrieres` | Airline-Lookup (Code → Klarname) | 1:n zu `Report_Flights_Data[op_carrier_code]` |
+| `_Calendar` | Datumsdimension (Jahr → Tag) | 1:n zu `Report_Flights_Data[fl_date]` |
+| `_Time` | Uhrzeit-Dimension (Stunde/Minute) | 1:n zu `Report_Flights_Data` (über `time_crs_union`) |
 | `_Measures` | disconnected Measures-Tabelle | — (keine Beziehung) |
 
 Der entscheidende Design-Punkt sind die **zwei getrennten Zeit-Dimensionen**: `_Calendar` trägt
 die Datumsebene (Jahr/Quartal/Monat/Woche/Tag + die „pro Tag"-Durchschnitte via
 `COUNTROWS(_Calendar)`), `_Time` die Tagesuhrzeit (Stunde) für die stündliche Tagesansicht. Eine
-eigene Dimension je Ebene — statt Datums-/Zeit-Berechnungen auf der Faktentabelle — ist
+eigene Dimension je Ebene, statt Datums-/Zeit-Berechnungen auf der Faktentabelle, ist
 Power-BI-Standard für saubere Zeitintelligenz. `_Measures` bündelt alle Kennzahlen in einer
 disconnected Tabelle (übliche Best Practice, hält Measures aus den Datentabellen heraus).

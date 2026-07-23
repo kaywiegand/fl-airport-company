@@ -26,16 +26,12 @@
 * **26,42 Min.** — Ø Verspätung pro Flug
 
 ## Inhaltsübersicht
-*Der vollständige Weg von den Bedingungen bis zu den Handlungsempfehlungen*
+*Der technische Weg von der Datenerhebung bis zur fertigen Kennzahl*
 
 1. Einstieg
-2. Kennzahlen
-3. Analyse Verspätungen
-4. Insights
-5. Analyse Zeiträume
-6. Insights
-7. Empfehlungen
-8. Ergänzungen
+2. Technischer Ansatz
+3. Kennzahlen
+4. Analyse Verspätungen
 
 
 ---
@@ -68,6 +64,10 @@
 
 ### Technischer Ansatz
 
+## Technischer Ansatz
+*Vier technische Arbeitsschritte bis zur vollständigen Analyse*
+
+
 ## Datenerhebung — SQL Native Query
 *Gefiltert an der Quelle, nicht clientseitig nachgezogen*
 
@@ -79,12 +79,6 @@
 ## Datenmodell — Star Schema
 *Eine Faktentabelle, zwei Zeit-Dimensionen, Airline-Lookup und eine Measures-Tabelle*
 
-* **Aufbau**
-  - Report_Flights_Data: Faktentabelle (1 Zeile = 1 Flug)
-  - _Calendar: Datumsebene (Jahr → Quartal → Monat → Woche → Tag)
-  - _Time: Tagesuhrzeit (Stunde) für die Tagesansicht
-  - Origin_Unique_Carrieres: Airline-Code → Klarname
-  - _Measures: eigene Tabelle für alle Kennzahlen
 
 ## Datenanalyse — DAX Measures
 *DIVIDE-sicher, Filterkontext bewusst genutzt*
@@ -96,15 +90,12 @@
 ### Kennzahlen
 
 ## Kennzahlen im Überblick
-*Konsolidierte Sicht — Detail-Charts siehe StoryView*
+*Konsolidierte Sicht, Detail-Charts siehe StoryView*
 
 * **1.264.229** — Flüge 2015–2017
-* **70 %** — unpünktlich (≥ 5 Min.)
-* **368.669 / 518.213** — Abflug- / Ankunftsverspätungen
+* **368.669** — Abflug-Verspätungen
+* **518.213** — Ankunfts-Verspätungen
 * **13** — betroffene Fluggesellschaften
-* **29,85 %** — On-Time Performance
-* **18,54** — Delay Index
-* **26,42 Min.** — Ø Verspätung pro Flug
 
 
 ---
@@ -118,25 +109,9 @@
 
 ---
 
-### Analyse Zeiträume
+### Abschluss
 
-## Aggregierte Betrachtung
-*Jahre, Quartale, Monate, Tage*
+## fLAirport
+*['Analyse unpünktlicher Flüge | Los Angeles International Airport', 'Power BI - Business Intelligence Analytics & Reporting | 2015–2017']*
 
-
-## Wochenansicht der Verspätungen
-*Anzahl und Summe nach Wochentag, mit On-Time Performance*
-
-
-## Tagesansicht der Verspätungen
-*Verlauf nach Uhrzeit (0–23 Uhr)*
-
-
-
----
-
-### Insights
-
-## Erkenntnisse Zeitebenen
-*Erkenntnisse aus den langfristigen und kurzfristigen Mustern im Überblick*
-
+> Vom Rohdatenimport bis zur Kennzahl

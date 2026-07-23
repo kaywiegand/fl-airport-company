@@ -509,7 +509,9 @@ body.nav-invert #progress-fill                    { background: #fff; }
 .ht-dot-wrap { flex: 1; display: flex; justify-content: center; }
 .ht-dot { width: 14px; height: 14px; border-radius: 50%; background: var(--navy); position: relative; z-index: 1; }
 .ht-labels { display: flex; }
-.ht-label { flex: 1; text-align: center; padding: 0 10px; }
+/* Linksbündig statt zentriert (Kay-Feedback 2026-07-23): kürzere Headlines lesen sich
+   linksbündig konsistenter mit dem Rest des Decks. */
+.ht-label { flex: 1; text-align: left; padding: 0 10px; }
 .ht-label h4 { font-size: 0.85em; font-weight: 700; margin: 0 0 0.35em; color: var(--ink); }
 .ht-label p { font-size: 0.8em; color: var(--ink-body); margin: 0; line-height: 1.5; }
 
@@ -566,13 +568,16 @@ body.nav-invert #progress-fill                    { background: #fff; }
 .ring-wrap { text-align: center; }
 .ring { width: 132px; height: 132px; border-radius: 50%; margin: 0 auto 14px; display: flex; align-items: center; justify-content: center; }
 .ring-inner { width: 126px; height: 126px; border-radius: 50%; background: #fff; display: flex; align-items: center; justify-content: center; font-weight: 100; font-size: 2em; color: var(--ink); }
-.ring-wrap .l { font-size: 0.72em; font-weight: 700; color: var(--ink); }
+/* Label global so klein/dezent wie .metric .lbl in der KPI-Reihe (Kay-Feedback 2026-07-23:
+   erst nur auf .combo gescoped, jetzt bewusst global — Ring-/Value-Peer-Beschriftung soll
+   überall einheitlich klein sein, nicht nur neben einer KPI-Reihe). */
+.ring-wrap .l { font-size: 0.62em; font-weight: 400; color: var(--ink-soft); margin-top: 8px; line-height: 1.4; }
 
 /* ── E5 — Ring + Value (gleichwertig nebeneinander) ── */
 .combo { display: grid; gap: 28px; justify-items: center; align-items: center; }
 .value-peer { text-align: center; }
-.value-peer .v { font-size: 2.4em; font-weight: 500; color: var(--ink); line-height: 1; }
-.value-peer .l { font-size: 0.72em; font-weight: 700; margin-top: 0.4em; color: var(--ink); }
+.value-peer .v { font-size: 2em; font-weight: 500; color: var(--ink); line-height: 1; }
+.value-peer .l { font-size: 0.62em; font-weight: 400; color: var(--ink-soft); margin-top: 8px; line-height: 1.4; }
 
 /* ── E6 — Box-Grid (3 neutral + 1 hervorgehoben) ── */
 .box-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; }
@@ -661,12 +666,13 @@ body.nav-invert #progress-fill                    { background: #fff; }
 .reveal .arrows + blockquote.statement,
 .reveal .arrows + .pf-grid,
 .reveal .metric-row + .pf-grid,
+.reveal .metric-row + .metric-row,
+.reveal .metric-row + .rings,
 .reveal .pf-grid + .text-cols-head,
 .reveal table + .text-lead-copy,
 .reveal .metric-row + .text-lead-copy,
 .reveal .box-grid + .box-grid,
 .reveal .sections-block + .box-grid,
-.reveal .reco-grid + .box-grid,
 .reveal .pf-grid + .box-grid,
 .reveal .box-grid + .rings,
 .reveal .rings + .box-grid,
@@ -675,6 +681,20 @@ body.nav-invert #progress-fill                    { background: #fff; }
 .reveal .arrows + .text-cols-head,
 .reveal .h-timeline + .text-cols-head,
 .reveal .text-lead-copy + .sections-block { margin-top: 2em; }
+
+/* .metric-row direkt vor .combo (E5 Ring+Value) wirkt zu eng mit nur 2em, weil beide
+   Reihen optisch sehr unterschiedlich aussehen (Kay-Feedback 2026-07-23) — eigene
+   5em-Regel statt in der allgemeinen 2em-Liste oben. */
+.reveal .metric-row + .combo { margin-top: 5em; }
+/* .reco-grid direkt vor .box-grid: die Box-Reihe gehört inhaltlich zur Empfehlung darüber
+   (z. B. "→ Informationen teilen" als Fortsetzung der Reco-Karten), kein neuer Gedankenblock
+   wie sonst bei .box-grid-Folgen — daher nur 1em statt der allgemeinen 2em (Kay-Feedback 2026-07-23). */
+.reveal .reco-grid + .box-grid { margin-top: 1em; }
+/* Wenn eine .metric-row unmittelbar vor .combo steht, soll sie optisch wie dessen
+   Fortsetzung wirken statt zentriert mit fixem Gap zu schweben — also auf dieselbe
+   Spalten-Verteilung wechseln (Kay-Feedback 2026-07-23). Nur für dieses Sibling-Paar,
+   nicht global, weil .metric-row sonst überall zentriert-mit-Gap bleiben soll. */
+.metric-row:has(+ .combo) { display: grid; grid-template-columns: repeat(4, 1fr); justify-items: stretch; gap: 28px; }
 
 /* Optionale Gruppen-Überschrift über einer Sections-Reihe (nicht pro Karte) — siehe
    item_type "sections", Feld `heading` in generate_html_from_json.py. */
@@ -728,6 +748,17 @@ body.nav-invert #progress-fill                    { background: #fff; }
 .chart-cols { display: flex; align-items: center; gap: 2.5em; flex: 1 1 auto; }
 .chart-cols-head { flex: 0 0 40%; }
 .chart-cols-caption { font-size: 0.82em; color: var(--ink-soft); line-height: 1.55; margin-top: 0.4em; }
+/* Bullets statt Fließtext neben Bild/Code (Kay-Feedback 2026-07-23) — bessere Lesbarkeit,
+   wenn mehrere kurze Einzelschritte aufgezählt werden. Gleiche Textgröße wie .chart-cols-caption. */
+.chart-cols-list { font-size: 0.82em; color: var(--ink-body); line-height: 1.6; margin: 0.6em 0 0; padding-left: 1.1em; }
+.chart-cols-list li { margin-bottom: 7px; }
+.chart-cols-caption + .chart-cols-list { margin-top: 0.9em; }
+/* Inline-Code in Bullets/Fließtext auf hellem Grund (z.B. fl_direction, ABS()) —
+   .code-block code (dunkler Codeblock) bleibt davon unberührt, eigene Regel. */
+.chart-cols-list code, .chart-cols-caption code, .reveal li code, .reveal p code {
+  font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 0.92em;
+  background: var(--card); color: var(--ink); padding: 1px 5px; border-radius: 3px;
+}
 /* Statement/Copy-Blöcke NACH der Caption (image_right mit Extra-Content) lesen links wie
    normaler Fließtext, nicht zentriert wie der Standard-Callout. */
 .chart-cols-head .reveal blockquote.statement,
@@ -749,11 +780,23 @@ body.nav-invert #progress-fill                    { background: #fff; }
    Gleiche .chart-cols/.chart-cols-reverse/.chart-cols-head-Struktur wie image_left/
    image_right — nur .chart-cols-code statt .chart-cols-img, damit der Copy-Text auf
    beiden Seiten (Code oder Bild) exakt gleich formatiert bleibt. */
-.chart-cols-code { flex: 1.2; min-width: 0; }
+/* align-self: center überschreibt gezielt das align-items:stretch von .chart-cols-reverse
+   (das ist für .chart-cols-img-large gedacht, siehe oben) — sonst klebt der Code-Block
+   an der vollen Zeilenhöhe fest statt vertikal zu zentrieren (Kay-Feedback 2026-07-23). */
+.chart-cols-code { flex: 1.2; min-width: 0; align-self: center; }
 .code-block-label { font-size: 0.68em; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.9em; }
-.code-block { background: var(--navy); color: rgba(255,255,255,0.88); font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 0.72em; line-height: 1.5; padding: 20px 22px; border-radius: var(--radius-card); overflow: auto; max-height: 62vh; }
-.code-block pre { margin: 0; white-space: pre-wrap; word-break: break-word; }
-.code-block code { font-family: inherit; color: inherit; background: none; padding: 0; border: none; }
+/* font-size 0.6em statt 0.8em (Kay-Feedback 2026-07-23): 0.8em wirkte, nachdem der
+   Vererbungs-Bug behoben war, zu groß und ließ SQL/DAX-Zeilen in der Split-Spalte
+   umbrechen — das jagged Zeilenende sah aus wie ein Rahmen um den Codeblock. */
+.code-block { background: var(--navy); color: rgba(255,255,255,0.88); font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 0.6em; line-height: 1.5; padding: 20px 22px; border-radius: var(--radius-card); overflow: auto; max-height: 62vh; }
+/* width:100% explizit (Kay-Feedback 2026-07-23: der weiße Codetext soll die Box komplett
+   ausfüllen, nicht auf die längste Zeile schrumpfen) — pre ist zwar block-level und würde das
+   im Normalfall automatisch tun, aber explizit macht die Absicht klar und schließt jede
+   Schrumpf-Quelle (z.B. Scrollbar-Gutter von overflow:auto) sauber aus. */
+.code-block pre { margin: 0; width: 100%; box-sizing: border-box; white-space: pre-wrap; word-break: break-word; font-size: inherit; line-height: inherit; }
+/* font-size/line-height explizit auf inherit, sonst gewinnt reveal.css' eigene .reveal pre code-Regel
+   gegen unseren Container-Wert, weil sie font-size direkt auf <code> setzt (Kay-Feedback 2026-07-22). */
+.code-block code { font-family: inherit; color: inherit; background: none; padding: 0; border: none; font-size: inherit; line-height: inherit; }
 
 /* ── Chart: one full-size image per slide (no shadow) ── */
 .chart-single { text-align: center; margin: 0.3em 0; }

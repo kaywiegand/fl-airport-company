@@ -59,6 +59,23 @@
               "description": "Verdichtete Business-Sicht: Kernzahlen, wichtigste Erkenntnisse und Handlungsempfehlungen."
             }
           ]
+        },
+        {
+          "kicker": "Agenda",
+          "layout": "L6",
+          "title": "Inhaltsübersicht",
+          "subtitle": "Die verdichtete Business-Sicht: Kennzahlen, Erkenntnisse und Empfehlungen",
+          "content": [
+            {
+              "type": "agenda",
+              "items": [
+                "Einstieg",
+                "Kennzahlen",
+                "Insights",
+                "Empfehlungen"
+              ]
+            }
+          ]
         }
       ]
     },
@@ -120,40 +137,55 @@
         },
         {
           "title": "Kennzahlen im Überblick",
-          "subtitle": "Betroffene Airlines, Steigerung, On-Time Performance, Delay Index und Ø-Verspätung",
+          "subtitle": "Konsolidierte Sicht, Detail-Charts siehe StoryView",
           "content": [
             {
               "type": "figures",
               "items": [
                 {
-                  "value": "13",
-                  "label": "Betroffene Fluggesellschaften",
+                  "value": "1.264.229",
+                  "label": "Flüge 2015–2017",
                   "sentiment": "neutral"
                 },
                 {
+                  "value": "368.669",
+                  "label": "Abflug-Verspätungen",
+                  "sentiment": "neutral"
+                },
+                {
+                  "value": "518.213",
+                  "label": "Ankunfts-Verspätungen",
+                  "sentiment": "neutral"
+                },
+                {
+                  "value": "13",
+                  "label": "betroffene Fluggesellschaften",
+                  "sentiment": "neutral"
+                }
+              ]
+            },
+            {
+              "type": "ring_value",
+              "items": [
+                {
+                  "kind": "ring",
+                  "value": "70 %",
+                  "percent": 70,
+                  "label": "Unpünktlichkeit (≥ 5 Min.)"
+                },
+                {
+                  "kind": "ring",
                   "value": "29,85 %",
-                  "label": "On-Time Performance",
-                  "sentiment": "negative"
+                  "percent": 29.85,
+                  "label": "On-Time Performance"
                 },
                 {
                   "value": "18,54",
-                  "label": "Delay Index",
-                  "sentiment": "warning"
-                },
-                {
-                  "value": "+7,17 %",
-                  "label": "Steigerung Verspätungen (22.135)",
-                  "sentiment": "warning"
-                },
-                {
-                  "value": "809",
-                  "label": "Ø Verspätungen pro Tag",
-                  "sentiment": "neutral"
+                  "label": "Delay Index"
                 },
                 {
                   "value": "26,42 Min.",
-                  "label": "Ø Verspätung pro Flug",
-                  "sentiment": "warning"
+                  "label": "Ø Verspätung pro Flug"
                 }
               ]
             }
@@ -219,7 +251,7 @@
     },
     {
       "nav_label": "Insights",
-      "nav_tick_label": "Insights",
+      "nav_tick_label": "",
       "slides": [
         {
           "title": "Erkenntnisse Zeitebenen",

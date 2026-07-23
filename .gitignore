@@ -1,6 +1,7 @@
 .DS_Store
 Abschlussprojekt-Infos.md
 Todo-and-Focus-Check.md
+docs/initial-project-brief.md
 
 # Portfolio Pipeline — versionierte Snapshots vor jeder Regenerierung (lokale Historie, kein Artefakt)
 public/archive/
